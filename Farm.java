@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Farm {
 
+
     public static int heaterId;
     public static int idCount = 1;
 
@@ -53,4 +54,15 @@ public class Farm {
     public void setAnimals(ArrayList<Animal> animals) {
         this.animals = animals;
     }
+
+    @Override
+    public String toString() {
+        return "Farm{" +
+                "owner='" + owner + '\'' +
+                ", shed=" + shed +
+                ", animals=" + animals +
+                '}';
+    }
 }
+
+
