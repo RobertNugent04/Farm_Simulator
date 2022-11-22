@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Farm {
 
 
-    public static int heaterId;
+    public static int farmId;
     public static int idCount = 1;
 
     private String owner;
@@ -19,16 +19,16 @@ public class Farm {
         this.owner = owner;
         this.shed = shed;
         this.animals = animals;
-        this.heaterId = idCount;
+        this.farmId = idCount;
         idCount++;
     }
 
-    public static int getHeaterId() {
-        return heaterId;
+    public static int getFarmId() {
+        return fARMId;
     }
 
-    public static void setHeaterId(int heaterId) {
-        Farm.heaterId = heaterId;
+    public static void setFarmId(int heaterId) {
+        Farm.heaterId = farmId;
     }
 
     public String getOwner() {
