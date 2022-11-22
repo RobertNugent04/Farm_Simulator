@@ -24,11 +24,11 @@ public class Farm {
     }
 
     public static int getFarmId() {
-        return fARMId;
+        return farmId;
     }
 
     public static void setFarmId(int heaterId) {
-        Farm.heaterId = farmId;
+        Farm.farmId = heaterId;
     }
 
     public String getOwner() {
@@ -58,11 +58,13 @@ public class Farm {
     @Override
     public String toString() {
         return "Farm{" +
+                "id=" + farmId + 
                 "owner='" + owner + '\'' +
                 ", shed=" + shed +
                 ", animals=" + animals +
                 '}';
     }
+    
 }
 
 
