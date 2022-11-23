@@ -58,13 +58,11 @@ public class Farm {
     @Override
     public String toString() {
         return "Farm{" +
-                "id=" + farmId + 
+                "id=" + farmId +
                 "owner='" + owner + '\'' +
                 ", shed=" + shed +
                 ", animals=" + animals +
                 '}';
     }
-    
+
 }
-
-

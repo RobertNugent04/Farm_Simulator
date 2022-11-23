@@ -1,15 +1,11 @@
-public abstract class Animal {
+public abstract class Animal{
 
     private double weight;
-
-    private String colour;
-
     public Animal() {
     }
 
-    public Animal(double weight, String colour) {
+    public Animal(double weight) {
         this.weight = weight;
-        this.colour = colour;
     }
 
     public double getWeight() {
@@ -20,19 +16,10 @@ public abstract class Animal {
         this.weight = weight;
     }
 
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
     @Override
     public String toString() {
         return "Animal{" +
                 "weight=" + weight +
-                ", colour='" + colour + '\'' +
                 '}';
     }
 

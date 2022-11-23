@@ -1,6 +1,6 @@
 public class MilkingMachine {
 
-private Object MilkTank;
+private MilkTank MilkTank;
 
     public MilkingMachine() {
     }
@@ -9,8 +9,19 @@ private Object MilkTank;
         return MilkTank;
     }
 
-    public void setMilkTank(Object milkTank) {
+    public void setMilkTank(MilkTank milkTank) {
         MilkTank = milkTank;
     }
-    
+
+    public void milk(Animal animal){
+
+        if(animal instanceof Milking){
+            this.MilkTank.addToTank(((Milking)animal).milkProduced());
+        }
+        else{
+            System.out.println("Animal does not produce milk");
+        }
+
+    }
+
 }

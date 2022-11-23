@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class DairyCow extends Animal{
+public class DairyCow extends Animal implements Milking{
 
     Random rand = new Random();
 
@@ -27,6 +27,13 @@ public class DairyCow extends Animal{
 
     public int getUdderCapacity() {
         return udderCapacity;
+    }
+
+    @Override
+    public double milkProduced(){
+
+        return this.udderCapacity;
+
     }
 
     @Override
