@@ -1,6 +1,7 @@
 public abstract class Animal{
 
     private double weight;
+
     public Animal() {
     }
 

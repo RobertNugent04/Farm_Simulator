@@ -18,9 +18,6 @@ private MilkTank MilkTank;
         if(animal instanceof Milking){
             this.MilkTank.addToTank(((Milking)animal).milkProduced());
         }
-        else{
-            System.out.println("Animal does not produce milk");
-        }
 
     }
 

@@ -1,15 +1,15 @@
-public class MilkTank {
+public class MilkTank{
 
     private double customCapacity;
 
-    private double remaingCapacity;
+    private double remainingCapacity;
 
     public MilkTank() {
     }
 
     public MilkTank(double customCapacity) {
         this.customCapacity = customCapacity;
-        this.remaingCapacity = customCapacity;
+        this.remainingCapacity = customCapacity;
     }
 
     public double getCustomCapacity() {
@@ -17,28 +17,28 @@ public class MilkTank {
     }
 
     public double getRemaingCapacity() {
-        return remaingCapacity;
+        return remainingCapacity;
     }
 
     public double freeSpace(){
 
-        this.remaingCapacity = this.customCapacity;
+        this.remainingCapacity = this.customCapacity;
 
-        return this.remaingCapacity;
+        return this.remainingCapacity;
 
     }
 
     public void addToTank(double amount){
 
-        this.remaingCapacity = this.remaingCapacity - amount;
+        this.remainingCapacity = this.remainingCapacity - amount;
 
     }
 
     public double getFromTank(double amount){
 
-        this.remaingCapacity = this.remaingCapacity + amount;
+        this.remainingCapacity = this.remainingCapacity + amount;
 
-        return this.remaingCapacity;
+        return this.remainingCapacity;
     }
 
     @Override

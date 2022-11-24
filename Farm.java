@@ -2,23 +2,20 @@ import java.util.ArrayList;
 
 public class Farm {
 
-
     public static int farmId;
+
     public static int idCount = 1;
 
     private String owner;
 
-    private Object shed;
-
-    private ArrayList<Animal> animals;
+    private ArrayList<Shed> sheds;
 
     public Farm() {
     }
 
-    public Farm(String owner, Object shed, ArrayList<Animal> animals) {
+    public Farm(String owner, ArrayList<Shed> sheds) {
         this.owner = owner;
-        this.shed = shed;
-        this.animals = animals;
+        this.sheds = sheds;
         this.farmId = idCount;
         idCount++;
     }
@@ -39,30 +36,19 @@ public class Farm {
         this.owner = owner;
     }
 
-    public Object getShed() {
-        return shed;
+    public ArrayList<Shed> getSheds() {
+        return sheds;
     }
 
-    public void setShed(Object shed) {
-        this.shed = shed;
-    }
-
-    public ArrayList<Animal> getAnimals() {
-        return animals;
-    }
-
-    public void setAnimals(ArrayList<Animal> animals) {
-        this.animals = animals;
+    public void setSheds(ArrayList<Shed> sheds) {
+        this.sheds = sheds;
     }
 
     @Override
     public String toString() {
         return "Farm{" +
-                "id=" + farmId +
                 "owner='" + owner + '\'' +
-                ", shed=" + shed +
-                ", animals=" + animals +
+                ", sheds=" + sheds +
                 '}';
     }
-
 }

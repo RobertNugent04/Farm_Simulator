@@ -4,6 +4,8 @@ public class DairyCow extends Animal implements Milking{
 
     Random rand = new Random();
 
+    String[] names = new String[]{"Mary, Maxine, Ivy, Elena, Fiona"};
+
     public static int dairyId;
     public static int idCount = 1;
 
@@ -12,13 +14,21 @@ public class DairyCow extends Animal implements Milking{
     private int udderCapacity;
 
     public DairyCow() {
+
+        this.name = names[rand.nextInt(names.length)];
+        this.udderCapacity = rand.nextInt(40 - 20) + 20;
+        this.dairyId = idCount;
+        idCount++;
+
     }
 
     public DairyCow(String name) {
+
         this.name = name;
         this.udderCapacity = rand.nextInt(40 - 20) + 20;
         this.dairyId = idCount;
         idCount++;
+
     }
 
     public String getName() {

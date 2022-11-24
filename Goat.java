@@ -1,9 +1,15 @@
+import java.util.Random;
+
 public class Goat extends Animal implements Milking{
 
     @Override
     public double milkProduced() {
 
-        return 2;
+        Random rand = new Random();
+
+        double produced = 2 + (3 - 2) * rand.nextDouble();
+
+        return produced;
 
     }
 
