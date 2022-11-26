@@ -2,7 +2,7 @@ import java.util.Collection;
 
 public class GoatShed extends Shed{
 
-    //A goat shed stores the goats so that they can be milked separately from the cows
+    //A goat shed stores only the goats so that they can be milked separately from the cows
         private MilkingMachine machine;
 
         private MilkTank tank;

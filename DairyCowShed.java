@@ -1,6 +1,6 @@
 import java.util.Collection;
 
-//A milking shed stores the animals which can be milked (dairy cows and goats)
+//A dairy cow shed stores only the dairy cows so that they are milked separately from the goats
 public class DairyCowShed extends Shed{
 
     private MilkingMachine machine;

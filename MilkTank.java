@@ -4,7 +4,13 @@ public class MilkTank{
 
     private double remainingCapacity;
 
+    public static final int STANDARD_CAPACITY = 2000;
+
     public MilkTank() {
+
+        this.customCapacity = STANDARD_CAPACITY;
+        remainingCapacity = STANDARD_CAPACITY;
+
     }
 
     public MilkTank(double customCapacity) {
@@ -16,12 +22,13 @@ public class MilkTank{
         return customCapacity;
     }
 
-    public double getRemaingCapacity() {
+    public double getRemainingCapacity() {
         return remainingCapacity;
     }
 
     public double freeSpace(){
 
+        //Empty the tank
         this.remainingCapacity = this.customCapacity;
 
         return this.remainingCapacity;
@@ -30,13 +37,34 @@ public class MilkTank{
 
     public void addToTank(double amount){
 
-        this.remainingCapacity = this.remainingCapacity - amount;
+        //If the tank runs out of space then you cannot add any more milk
+        if(this.remainingCapacity - amount < 0){
+
+            this.remainingCapacity = 0;
+
+        }
+        else {
+
+            this.remainingCapacity = this.remainingCapacity - amount;
+
+        }
 
     }
 
     public double getFromTank(double amount){
 
-        this.remainingCapacity = this.remainingCapacity + amount;
+        //You cannot take more milk than is available
+        if(this.remainingCapacity + amount > customCapacity){
+
+            this.remainingCapacity = this.customCapacity;
+
+        }
+
+        else{
+
+            this.remainingCapacity = this.remainingCapacity + amount;
+
+        }
 
         return this.remainingCapacity;
     }

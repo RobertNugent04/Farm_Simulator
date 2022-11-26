@@ -14,16 +14,6 @@ public class Sheep extends Animal {
         this.age = age;
     }
 
-    public Sheep(double weight, int age) {
-        super(weight);
-        this.age = age;
-    }
-
-    public Sheep(double weight, String pedigree) {
-        super(weight);
-        this.pedigree = pedigree;
-    }
-
     public String getPedigree() {
         return pedigree;
     }

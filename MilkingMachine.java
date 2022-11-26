@@ -15,7 +15,8 @@ private MilkTank MilkTank;
 
     public void milk(Animal animal){
 
-        if(animal instanceof Milking){
+        //An animal cannot be milked more than 5 times a day
+        if(animal instanceof Milking && ((Milking)animal).timesMilked() < 6){
             this.MilkTank.addToTank(((Milking)animal).milkProduced());
         }
 

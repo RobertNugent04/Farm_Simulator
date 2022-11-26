@@ -12,16 +12,6 @@ public class BeefCow extends Animal{
         this.pedigree = pedigree;
     }
 
-    public BeefCow(double weight, int age) {
-        super(weight);
-        this.age = age;
-    }
-
-    public BeefCow(String pedigree, int age) {
-        this.pedigree = pedigree;
-        this.age = age;
-    }
-
     public String getPedigree() {
         return pedigree;
     }

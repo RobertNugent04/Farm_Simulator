@@ -1,5 +1,9 @@
 public abstract class Animal{
 
+    private int id;
+
+    public static int idCount = 1;
+
     private double weight;
 
     public Animal() {
