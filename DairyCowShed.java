@@ -33,7 +33,7 @@ public class DairyCowShed extends Shed{
 
     }
 
-    public void milkAnimal(Animal animal){
+    public void milkAnimal(Milking animal){
 
         this.machine.milk(animal);
 

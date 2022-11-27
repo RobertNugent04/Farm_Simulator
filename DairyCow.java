@@ -78,6 +78,13 @@ public class DairyCow extends Animal implements Milking{
     }
 
     @Override
+    public void milked(){
+
+        this.setTimesMilked(this.timesMilked++);
+
+    }
+
+    @Override
     public String toString() {
         return "DairyCow{" +
                 "name='" + name + '\'' +

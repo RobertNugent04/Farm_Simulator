@@ -16,6 +16,14 @@ public class Goat extends Animal implements Milking{
         idCount++;
     }
 
+    public int getTimesMilked() {
+        return timesMilked;
+    }
+
+    public void setTimesMilked(int timesMilked) {
+        this.timesMilked = timesMilked;
+    }
+
     @Override
     public double milkProduced() {
 
@@ -31,6 +39,13 @@ public class Goat extends Animal implements Milking{
     public int timesMilked(){
 
         return this.timesMilked;
+
+    }
+
+    @Override
+    public void milked() {
+
+        this.setTimesMilked(this.timesMilked++);
 
     }
 
