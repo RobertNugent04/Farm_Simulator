@@ -33,7 +33,7 @@ public class DairyCowShed extends Shed{
 
     }
 
-    public void milkAnimal(Milking animal){
+    public void milkAnimal(Milkable animal){
 
         this.machine.milk(animal);
 
@@ -43,8 +43,8 @@ public class DairyCowShed extends Shed{
 
         for (int i = 0; i < animals.size(); i = 0){
 
-            if(animals.toArray()[i] instanceof Milking){
-                this.tank.addToTank(((Milking)animals.toArray()[i]).milkProduced());
+            if(animals.toArray()[i] instanceof Milkable){
+                this.tank.addToTank(((Milkable)animals.toArray()[i]).milkProduced());
             }
 
         }

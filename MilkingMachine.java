@@ -5,7 +5,7 @@ private MilkTank MilkTank;
     public MilkingMachine() {
     }
 
-    public Object getMilkTank() {
+    public MilkTank getMilkTank() {
         return MilkTank;
     }
 
@@ -13,7 +13,7 @@ private MilkTank MilkTank;
         MilkTank = milkTank;
     }
 
-    public void milk(Milking animal){
+    public void milk(Milkable animal){
 
         //An animal cannot be milked more than 5 times a day
         if(animal.timesMilked() < 6){
@@ -24,3 +24,4 @@ private MilkTank MilkTank;
     }
 
 }
+

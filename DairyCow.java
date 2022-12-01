@@ -1,12 +1,10 @@
 import java.util.Random;
 
-public class DairyCow extends Animal implements Milking{
+public class DairyCow extends Animal implements Milkable {
 
-    Random rand = new Random();
+    static String[] names = new String[]{"Mary, Maxine, Ivy, Elena, Fiona"};
 
-    String[] names = new String[]{"Mary, Maxine, Ivy, Elena, Fiona"};
-
-    public static int dairyId;
+    public int dairyId;
     public static int idCount = 1;
 
     private String name;
@@ -16,7 +14,7 @@ public class DairyCow extends Animal implements Milking{
     private int timesMilked;
 
     public DairyCow() {
-
+        Random rand = new Random();
         this.name = names[rand.nextInt(names.length)];
         this.udderCapacity = rand.nextInt(40 - 20) + 20;
         this.timesMilked = 0;
@@ -26,7 +24,7 @@ public class DairyCow extends Animal implements Milking{
     }
 
     public DairyCow(String name) {
-
+        Random rand = new Random();
         this.name = name;
         this.udderCapacity = rand.nextInt(40 - 20) + 20;
         this.timesMilked = 0;
@@ -45,10 +43,6 @@ public class DairyCow extends Animal implements Milking{
 
     public int getTimesMilked() {
         return timesMilked;
-    }
-
-    public void setRand(Random rand) {
-        this.rand = rand;
     }
 
     public void setName(String name) {

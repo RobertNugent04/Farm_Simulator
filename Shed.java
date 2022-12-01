@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collection;
 
-//Shed where animals which cannot be milked are stored
 public abstract class Shed{
 
-    public static int shedId;
+    public int shedId;
 
     public static int idCount = 1;
 

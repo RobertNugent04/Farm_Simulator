@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Farm {
 
-    public static int farmId;
+    public int farmId;
 
     public static int idCount = 1;
 
@@ -20,12 +20,12 @@ public class Farm {
         idCount++;
     }
 
-    public static int getFarmId() {
+    public int getFarmId() {
         return farmId;
     }
 
-    public static void setFarmId(int heaterId) {
-        Farm.farmId = heaterId;
+    public void setFarmId(int farmId) {
+        this.farmId = farmId;
     }
 
     public String getOwner() {

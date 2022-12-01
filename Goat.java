@@ -1,8 +1,8 @@
 import java.util.Random;
 
-public class Goat extends Animal implements Milking{
+public class Goat extends Animal implements Milkable {
 
-    public static int goatId;
+    public int goatId;
 
     public static int idCount = 1;
 
