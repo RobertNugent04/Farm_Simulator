@@ -2,7 +2,15 @@ public class MilkingMachine {
 
 private MilkTank MilkTank;
 
+    public int machineId;
+
+    public static int idCount = 1;
+
     public MilkingMachine() {
+
+        this.machineId = idCount;
+        idCount++;
+
     }
 
     public MilkTank getMilkTank() {
@@ -23,5 +31,9 @@ private MilkTank MilkTank;
 
     }
 
+    @Override
+    public String toString() {
+        return "{MachineId = " + machineId + "}";
+    }
 }
 

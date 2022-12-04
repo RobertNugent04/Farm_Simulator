@@ -2,11 +2,10 @@ import java.util.Random;
 
 public class Goat extends Animal implements Milkable {
 
+    //Goats have separate ids from dairy cows
     public int goatId;
 
     public static int idCount = 1;
-
-    private String name;
 
     private int timesMilked;
 
@@ -14,6 +13,15 @@ public class Goat extends Animal implements Milkable {
         this.goatId = idCount;
         this.timesMilked = 0;
         idCount++;
+    }
+
+    public Goat(double weight){
+
+        super(weight);
+        this.goatId = idCount;
+        this.timesMilked = 0;
+        idCount++;
+
     }
 
     public int getTimesMilked() {
@@ -49,4 +57,11 @@ public class Goat extends Animal implements Milkable {
 
     }
 
+    @Override
+    public String toString() {
+        return "Goat{" +
+                "goatId=" + goatId +
+                super.toString() +
+                '}';
+    }
 }

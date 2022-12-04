@@ -20,11 +20,13 @@ public abstract class Shed{
         idCount++;
     }
 
+    public Collection<Animal> getAnimals() {
+        return animals;
+    }
 
     @Override
     public String toString() {
-        return "Shed{" +
-                "shedId=" + shedId +
+        return "shedId=" + shedId +
                 "animals=" + animals +
                 '}';
     }

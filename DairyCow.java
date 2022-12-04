@@ -2,9 +2,11 @@ import java.util.Random;
 
 public class DairyCow extends Animal implements Milkable {
 
-    static String[] names = new String[]{"Mary, Maxine, Ivy, Elena, Fiona"};
+    //String array filled with random names to be given to the cows
+    static String[] names = new String[]{"Mary", "Maxine", "Ivy", "Elena", "Fiona"};
 
-    public int dairyId;
+    //Dairy cows have separate ids from goats
+    private int dairyId;
     public static int idCount = 1;
 
     private String name;
@@ -13,8 +15,9 @@ public class DairyCow extends Animal implements Milkable {
 
     private int timesMilked;
 
-    public DairyCow() {
+    public DairyCow(double weight) {
         Random rand = new Random();
+        //Picks a random name from the array
         this.name = names[rand.nextInt(names.length)];
         this.udderCapacity = rand.nextInt(40 - 20) + 20;
         this.timesMilked = 0;
@@ -23,7 +26,8 @@ public class DairyCow extends Animal implements Milkable {
 
     }
 
-    public DairyCow(String name) {
+    public DairyCow(String name, double weight) {
+        super(weight);
         Random rand = new Random();
         this.name = name;
         this.udderCapacity = rand.nextInt(40 - 20) + 20;
@@ -31,6 +35,10 @@ public class DairyCow extends Animal implements Milkable {
         this.dairyId = idCount;
         idCount++;
 
+    }
+
+    public int getDairyId() {
+        return dairyId;
     }
 
     public String getName() {
@@ -83,6 +91,7 @@ public class DairyCow extends Animal implements Milkable {
         return "DairyCow{" +
                 "name='" + name + '\'' +
                 ", udderCapacity=" + udderCapacity +
+                super.toString() +
                 '}';
     }
 }

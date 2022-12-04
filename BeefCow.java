@@ -1,22 +1,28 @@
 public class BeefCow extends Animal{
 
-    private String pedigree;
+    private int pedigree;
 
     private int age;
 
     public BeefCow() {
     }
 
-    public BeefCow(double weight, String pedigree) {
+    public BeefCow(double weight, int pedigree) {
         super(weight);
         this.pedigree = pedigree;
     }
 
-    public String getPedigree() {
+    public BeefCow(double weight, int pedigree, int age) {
+        super(weight);
+        this.pedigree = pedigree;
+        this.age = age;
+    }
+
+    public int getPedigree() {
         return pedigree;
     }
 
-    public void setPedigree(String pedigree) {
+    public void setPedigree(int pedigree) {
         this.pedigree = pedigree;
     }
 
@@ -28,4 +34,12 @@ public class BeefCow extends Animal{
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "BeefCow{" +
+                super.toString() +
+                ", pedigree=" + pedigree +
+                ", age=" + age +
+                '}';
+    }
 }

@@ -7,8 +7,6 @@ public class DairyCowShed extends Shed{
 
     private MilkTank tank;
 
-    private Collection<DairyCow> cows;
-
     public DairyCowShed() {
     }
 
@@ -16,8 +14,8 @@ public class DairyCowShed extends Shed{
         this.tank = tank;
     }
 
-    public DairyCowShed(Collection<DairyCow> cows, MilkingMachine machine, MilkTank tank) {
-        this.cows = cows;
+    public DairyCowShed(Collection<Animal> animals, MilkingMachine machine, MilkTank tank) {
+        super(animals);
         this.machine = machine;
         this.tank = tank;
     }
@@ -51,4 +49,12 @@ public class DairyCowShed extends Shed{
 
     }
 
+    @Override
+    public String toString() {
+        return "DairyCowShed{" +
+                super.toString() +
+                "Milking machine = " + machine +
+                ", tank=" + tank +
+                '}';
+    }
 }

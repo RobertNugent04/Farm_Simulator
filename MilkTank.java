@@ -4,13 +4,12 @@ public class MilkTank{
 
     private double amountInTank;
 
+    //Default capacity of a tank
     public static final int STANDARD_CAPACITY = 2000;
 
     public MilkTank() {
-
         this.customCapacity = STANDARD_CAPACITY;
-        amountInTank = STANDARD_CAPACITY;
-
+        amountInTank = 0;
     }
 
     public MilkTank(double customCapacity) {
@@ -22,7 +21,7 @@ public class MilkTank{
         return customCapacity;
     }
 
-    public double getRemainingCapacity() {
+    public double getAmountInTank() {
         return amountInTank;
     }
 
@@ -34,7 +33,8 @@ public class MilkTank{
         this.amountInTank = amountInTank;
     }
 
-    public double freeSpace(){
+    //Was originally called freeSpace() in the brief, but I renamed it to emptyTank() to make it clearer what happens within the method
+    public double emptyTank(){
 
         //Empty the tank
         this.setAmountInTank(0);
@@ -56,7 +56,6 @@ public class MilkTank{
             this.setAmountInTank(this.amountInTank + amount);
 
         }
-
     }
 
     public double getFromTank(double amount){
@@ -73,15 +72,14 @@ public class MilkTank{
             this.setAmountInTank(this.amountInTank - amount);
 
         }
-
         return this.amountInTank;
     }
 
     @Override
     public String toString() {
-        return "MilkingMachine{" +
+        return "MilkTank{" +
                 "customCapacity=" + customCapacity +
+                ", amountInTank=" + amountInTank +
                 '}';
     }
-
 }

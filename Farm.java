@@ -13,6 +13,10 @@ public class Farm {
     public Farm() {
     }
 
+    public Farm(String owner) {
+        this.owner = owner;
+    }
+
     public Farm(String owner, ArrayList<Shed> sheds) {
         this.owner = owner;
         this.sheds = sheds;
@@ -47,7 +51,8 @@ public class Farm {
     @Override
     public String toString() {
         return "Farm{" +
-                "owner='" + owner + '\'' +
+                "id=" + farmId +
+                ", owner='" + owner + '\'' +
                 ", sheds=" + sheds +
                 '}';
     }

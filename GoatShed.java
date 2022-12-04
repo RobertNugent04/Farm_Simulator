@@ -7,17 +7,12 @@ public class GoatShed extends Shed{
 
         private MilkTank tank;
 
-        private Collection<Goat> goats;
-
-        public GoatShed() {
-        }
-
         public GoatShed(MilkTank tank) {
             this.tank = tank;
         }
 
-        public GoatShed(Collection<Goat> goats, MilkingMachine machine, MilkTank tank) {
-            this.goats = goats;
+        public GoatShed(Collection<Animal> animals, MilkingMachine machine, MilkTank tank) {
+            super(animals);
             this.machine = machine;
             this.tank = tank;
         }
@@ -39,15 +34,24 @@ public class GoatShed extends Shed{
 
         }
 
-        public void milkAnimal(Collection<Goat> goats){
+        public void milkAnimal(Collection<Animal> animals){
 
-            for (int i = 0; i < goats.size(); i = 0){
+            for (int i = 0; i < animals.size(); i = 0){
 
-                    this.tank.addToTank(((Milkable)goats.toArray()[i]).milkProduced());
-
+                if(animals instanceof Milkable) {
+                    this.tank.addToTank(((Milkable) animals.toArray()[i]).milkProduced());
+                }
 
             }
 
         }
 
+    @Override
+    public String toString() {
+        return "GoatShed{" +
+                super.toString() +
+                "machine=" + machine +
+                ", tank=" + tank +
+                '}';
     }
+}
