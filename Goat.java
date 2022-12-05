@@ -3,29 +3,30 @@ import java.util.Random;
 public class Goat extends Animal implements Milkable {
 
     //Goats have separate ids from dairy cows
-    public int goatId;
-
-    public static int idCount = 1;
 
     private int timesMilked;
 
+    private double milkProduced;
+
     public Goat() {
-        this.goatId = idCount;
+        Random rand = new Random();
         this.timesMilked = 0;
-        idCount++;
+        this.milkProduced = 2 + (3 - 2) * rand.nextDouble();
     }
 
     public Goat(double weight){
-
         super(weight);
-        this.goatId = idCount;
+        Random rand = new Random();
         this.timesMilked = 0;
-        idCount++;
-
+        this.milkProduced = 2 + (3 - 2) * rand.nextDouble();
     }
 
     public int getTimesMilked() {
         return timesMilked;
+    }
+
+    public double getMilkProduced() {
+        return milkProduced;
     }
 
     public void setTimesMilked(int timesMilked) {
@@ -60,7 +61,7 @@ public class Goat extends Animal implements Milkable {
     @Override
     public String toString() {
         return "Goat{" +
-                "goatId=" + goatId +
+                "milk produced = " + milkProduced +
                 super.toString() +
                 '}';
     }

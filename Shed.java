@@ -26,8 +26,8 @@ public abstract class Shed{
 
     @Override
     public String toString() {
-        return "shedId=" + shedId +
-                "animals=" + animals +
+        return "shedId = " + shedId +
+                ", animals=" + animals +
                 '}';
     }
 }

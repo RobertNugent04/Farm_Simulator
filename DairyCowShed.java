@@ -39,7 +39,7 @@ public class DairyCowShed extends Shed{
 
     public void milkAnimal(Collection<Animal> animals){
 
-        for (int i = 0; i < animals.size(); i = 0){
+        for (int i = 0; i < animals.size(); i++){
 
             if(animals.toArray()[i] instanceof Milkable){
                 this.tank.addToTank(((Milkable)animals.toArray()[i]).milkProduced());

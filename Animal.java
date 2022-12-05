@@ -3,6 +3,10 @@ public abstract class Animal{
     //Only dairy cows and goats are getting ids, therefore ids are not inherited from the animal class
 
     //I am assuming that weight is the only common field between all the animals
+    private int id;
+
+    public static int idCount = 1;
+
     private double weight;
 
     public Animal() {
@@ -10,6 +14,12 @@ public abstract class Animal{
 
     public Animal(double weight) {
         this.weight = weight;
+        this.id = idCount;
+        idCount++;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public double getWeight() {
@@ -22,7 +32,8 @@ public abstract class Animal{
 
     @Override
     public String toString() {
-        return "weight=" + weight;
+        return  " id = " + id +
+                ", weight=" + weight + "kg";
     }
 
 }
