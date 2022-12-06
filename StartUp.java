@@ -20,10 +20,10 @@ public class StartUp {
                         Farm farm1 = new Farm(sc.nextLine());
 
                         //Make goats with values from file
-                        Goat g1 = new Goat(sc.nextDouble());
-                        Goat g2 = new Goat(sc.nextDouble());
-                        Goat g3 = new Goat(sc.nextDouble());
-                        Goat g4 = new Goat(sc.nextDouble());
+                        Goat g1 = new Goat(sc.nextInt(), sc.nextDouble());
+                        Goat g2 = new Goat(sc.nextInt(), sc.nextDouble());
+                        Goat g3 = new Goat(sc.nextInt(), sc.nextDouble());
+                        Goat g4 = new Goat(sc.nextInt(), sc.nextDouble());
 
                         //ArrayList with all the goats
                         ArrayList<Goat> goats = new ArrayList<>();
@@ -35,6 +35,10 @@ public class StartUp {
                         //Make sheep with values from file
                         Sheep s1 = new Sheep(sc.nextInt(), sc.nextInt(), sc.nextInt());
                         Sheep s2 = new Sheep(sc.nextInt(), sc.nextInt(), sc.nextInt());
+
+                        ArrayList<Sheep> sheep = new ArrayList();
+                        sheep.add(s1);
+                        sheep.add(s2);
 
                         //Create arrayList of animals which will be put in the dairy cow shed
                         ArrayList<Animal> animals1 = new ArrayList<>();
@@ -52,14 +56,14 @@ public class StartUp {
                         mm1.setMilkTank(mt1);
 
                         //Make dairy cows with values from file
-                        DairyCow dc1 = new DairyCow(sc.nextDouble());
-                        DairyCow dc2 = new DairyCow(sc.nextDouble());
-                        DairyCow dc3 = new DairyCow(sc.nextDouble());
+                        DairyCow dc1 = new DairyCow(sc.nextInt(), sc.nextDouble());
+                        DairyCow dc2 = new DairyCow(sc.nextInt(), sc.nextDouble());
+                        DairyCow dc3 = new DairyCow(sc.nextInt(), sc.nextDouble());
 
                         //Move scanner forward
                         sc.nextLine();
 
-                        DairyCow dc4 = new DairyCow(sc.next(), sc.nextDouble());
+                        DairyCow dc4 = new DairyCow(sc.next(), sc.nextInt(), sc.nextDouble());
 
                         //ArrayList with all the cows
                         ArrayList<DairyCow> dairycows = new ArrayList<>();
@@ -69,8 +73,12 @@ public class StartUp {
                         dairycows.add(dc4);
 
                         //Make beef cows with values from file
-                        BeefCow bc1 = new BeefCow(sc.nextInt(), sc.nextInt(), sc.nextInt());
-                        BeefCow bc2 = new BeefCow(sc.nextInt(), sc.nextInt(), sc.nextInt());
+                        BeefCow bc1 = new BeefCow(sc.nextInt(), sc.nextDouble(), sc.nextInt());
+                        BeefCow bc2 = new BeefCow(sc.nextInt(), sc.nextDouble(), sc.nextInt());
+
+                        ArrayList<BeefCow> beefcows = new ArrayList();
+                        beefcows.add(bc1);
+                        beefcows.add(bc2);
 
                         //Create arrayList of animals which will be put in the goat shed
                         ArrayList<Animal> animals2 = new ArrayList<>();
@@ -96,7 +104,7 @@ public class StartUp {
 
                         farm1.setSheds(sheds);
 
-                        FarmApp.app(farm1, dcShed, goatShed, animals1, animals2, goats, dairycows);
+                        FarmApp.app(farm1, dcShed, goatShed, animals1, animals2, goats, dairycows, sheep, beefcows);
 
                     } catch (InputMismatchException ex) {
                         System.out.println("Mismatch");

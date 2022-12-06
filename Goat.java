@@ -14,8 +14,8 @@ public class Goat extends Animal implements Milkable {
         this.milkProduced = 2 + (3 - 2) * rand.nextDouble();
     }
 
-    public Goat(double weight){
-        super(weight);
+    public Goat(int age, double weight){
+        super(age, weight);
         Random rand = new Random();
         this.timesMilked = 0;
         this.milkProduced = 2 + (3 - 2) * rand.nextDouble();
@@ -31,6 +31,10 @@ public class Goat extends Animal implements Milkable {
 
     public void setTimesMilked(int timesMilked) {
         this.timesMilked = timesMilked;
+    }
+
+    public void setMilkProduced(double milkProduced) {
+        this.milkProduced = milkProduced;
     }
 
     @Override

@@ -7,12 +7,15 @@ public abstract class Animal{
 
     public static int idCount = 1;
 
+    private int age;
+
     private double weight;
 
     public Animal() {
     }
 
-    public Animal(double weight) {
+    public Animal(int age, double weight) {
+        this.age = age;
         this.weight = weight;
         this.id = idCount;
         idCount++;
@@ -22,8 +25,16 @@ public abstract class Animal{
         return id;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     public double getWeight() {
         return weight;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public void setWeight(double weight) {
@@ -33,6 +44,7 @@ public abstract class Animal{
     @Override
     public String toString() {
         return  " id = " + id +
+                ", age = " + age +
                 ", weight=" + weight + "kg";
     }
 

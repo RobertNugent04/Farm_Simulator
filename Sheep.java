@@ -8,8 +8,8 @@ public class Sheep extends Animal {
 
     }
 
-    public Sheep(double weight, int pedigree, int age) {
-        super(weight);
+    public Sheep(int age, double weight, int pedigree) {
+        super(age, weight);
         this.pedigree = pedigree;
         this.age = age;
     }
@@ -22,20 +22,11 @@ public class Sheep extends Animal {
         this.pedigree = pedigree;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     @Override
     public String toString() {
         return "Sheep{" +
                 super.toString() +
                 ", pedigree=" + pedigree +
-                ", age=" + age +
                 '}';
     }
 }

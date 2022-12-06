@@ -13,8 +13,8 @@ public class DairyCow extends Animal implements Milkable {
 
     private int timesMilked;
 
-    public DairyCow(double weight) {
-        super(weight);
+    public DairyCow(int age, double weight) {
+        super(age, weight);
         Random rand = new Random();
         //Picks a random name from the array
         this.name = names[rand.nextInt(names.length)];
@@ -23,8 +23,8 @@ public class DairyCow extends Animal implements Milkable {
 
     }
 
-    public DairyCow(String name, double weight) {
-        super(weight);
+    public DairyCow(String name, int age, double weight) {
+        super(age, weight);
         Random rand = new Random();
         this.name = name;
         this.udderCapacity = rand.nextInt(40 - 20) + 20;
