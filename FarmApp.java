@@ -32,57 +32,7 @@ public class FarmApp {
         }
         else if (option == 2) {
 
-            System.out.println("****************************");
-            System.out.println("Select a type of animal:");
-            System.out.println("1.Goat/Sheep");
-            System.out.println("2.Dairy cow/Beef cow");
-            System.out.println("****************************");
-            type = keyboard.nextInt();
-
-            while (type < 1 || type > 2){
-
-                System.out.println("Invalid type");
-                System.out.println();
-                System.out.println("****************************");
-                System.out.println("Select a type of animal:");
-                System.out.println("1.Goat/Sheep");
-                System.out.println("2.Dairy cow/Beef cow");
-                System.out.println("****************************");
-                type = keyboard.nextInt();
-
-            }
-
-                System.out.println("Enter the id of the animal: ");
-                option = keyboard.nextInt();
-
-                if (type == 1) {
-
-                    for (int i = 0; i < animals1.size(); i++) {
-
-                        if(animals1.get(i).getId() == option) {
-                            System.out.println(animals1.get(i));
-                            app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
-                        }
-
-                    }
-
-                        System.out.println("A goat/sheep cow does not exist with this id");
-                        app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
-                    }
-
-                else if(type == 2){
-
-                    for (int i = 0; i < animals2.size(); i++) {
-
-                        if (animals2.get(i).getId() == option) {
-                            System.out.println(animals2.get(i));
-                            app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
-                        }
-                    }
-                            System.out.println("A dairy cow/beef cow does not exist with this id");
-                            app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
-
-                    }
+            animalDetails(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
 
                 }
 
@@ -179,71 +129,144 @@ public class FarmApp {
 
         } else if (option == 8) {
 
-            int mostMilk = 0;
-            int milk = 0;
-            boolean biggestFound = false;
+            orderAnimals(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
 
+        } else if (option == 0){
+
+            System.out.println("Exiting....");
+            System.exit(0);
+
+        }
+
+    }
+
+    public static void animalDetails(Farm farm1, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows){
+
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("****************************");
+        System.out.println("Select a type of animal:");
+        System.out.println("1.Goat/Sheep");
+        System.out.println("2.Dairy cow/Beef cow");
+        System.out.println("****************************");
+        int type = keyboard.nextInt();
+
+        while (type < 1 || type > 2){
+
+            System.out.println("Invalid type");
+            System.out.println();
             System.out.println("****************************");
-            System.out.println("Select a the herd to order:");
+            System.out.println("Select a type of animal:");
             System.out.println("1.Goat/Sheep");
             System.out.println("2.Dairy cow/Beef cow");
+            System.out.println("****************************");
+            type = keyboard.nextInt();
+
+        }
+
+        System.out.println("Enter the id of the animal: ");
+        int option = keyboard.nextInt();
+
+        if (type == 1) {
+
+            for (int i = 0; i < animals1.size(); i++) {
+
+                if(animals1.get(i).getId() == option) {
+                    System.out.println(animals1.get(i));
+                    app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
+                }
+
+            }
+
+            System.out.println("A goat/sheep cow does not exist with this id");
+            app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
+        }
+
+        else if(type == 2){
+
+            for (int i = 0; i < animals2.size(); i++) {
+
+                if (animals2.get(i).getId() == option) {
+                    System.out.println(animals2.get(i));
+                    app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
+                }
+            }
+            System.out.println("A dairy cow/beef cow does not exist with this id");
+            app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
+
+        }
+
+
+    }
+
+    public static void orderAnimals(Farm farm1, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows){
+
+        Scanner keyboard = new Scanner(System.in);
+        int mostMilk = 0;
+        int milk = 0;
+        boolean biggestFound = false;
+
+        System.out.println("****************************");
+        System.out.println("Select a the herd to order:");
+        System.out.println("1.Goat/Sheep");
+        System.out.println("2.Dairy cow/Beef cow");
+        System.out.println("****************************");
+        int option = keyboard.nextInt();
+
+        if (option == 1){
+
+            System.out.println("****************************");
+            System.out.println("Select a value to order by:");
+            System.out.println("1.Milk produced");
             System.out.println("****************************");
             option = keyboard.nextInt();
 
             if (option == 1){
 
-                System.out.println("****************************");
-                System.out.println("Select a value to order by:");
-                System.out.println("1.Milk produced");
-                System.out.println("****************************");
-                option = keyboard.nextInt();
+                for (int j = 0; j < goats.size(); j++){
+                    milk = 0;
+                    for (int i = 0; i < goats.size(); i++) {
 
-                if (option == 1){
+                        if (biggestFound == false) {
 
-                    for (int j = 0; j < goats.size(); j++){
-                        milk = 0;
-                        for (int i = 0; i < goats.size(); i++) {
+                            if (goats.get(i).getMilkProduced() > goats.get(mostMilk).getMilkProduced()) {
+                                milk = i;
+                                mostMilk = i;
 
-                            if (biggestFound == false) {
-
-                                if (goats.get(i).getMilkProduced() > goats.get(mostMilk).getMilkProduced()) {
-                                    milk = i;
-                                    mostMilk = i;
-
-                                }
-                            }
-
-                            else{
-
-                                if (goats.get(i).getMilkProduced() < goats.get(mostMilk).getMilkProduced() && goats.get(i).getMilkProduced() > milk) {
-                                    //The previous cow that passed through
-                                    milk = i;
-
-                                }
                             }
                         }
-                        //Set the next biggest cow
-                        mostMilk = milk;
-                        //After first time through the loop, the cow that produces the most milk has been found
-                        biggestFound = true;
-                        System.out.println(goats.get(mostMilk));
 
+                        else{
+
+                            if (goats.get(i).getMilkProduced() < goats.get(mostMilk).getMilkProduced() && goats.get(i).getMilkProduced() > milk) {
+                                //The previous cow that passed through
+                                milk = i;
+
+                            }
+                        }
                     }
-                }
+                    //Set the next biggest cow
+                    mostMilk = milk;
+                    //After first time through the loop, the cow that produces the most milk has been found
+                    biggestFound = true;
+                    System.out.println(goats.get(mostMilk));
 
+                }
             }
 
-            else if (option == 2){
+        }
 
-                System.out.println("****************************");
-                System.out.println("Select a value to order by:");
-                System.out.println("1.Milk produced");
-                System.out.println("****************************");
-                option = keyboard.nextInt();
+        else if (option == 2){
 
-                if (option == 1){
+            System.out.println("****************************");
+            System.out.println("Select a value to order by:");
+            System.out.println("1.Milk produced");
+            System.out.println("****************************");
+            option = keyboard.nextInt();
 
-                    for (int j = 0; j < dairycows.size(); j++){
+            if (option == 1){
+
+                for (int j = 0; j < dairycows.size(); j++){
                     milk = 0;
                     for (int i = 0; i < dairycows.size(); i++) {
 
@@ -265,24 +288,17 @@ public class FarmApp {
                             }
                         }
                     }
-                        //Set the next biggest cow
-                        mostMilk = milk;
-                        //After first time through the loop, the cow that produces the most milk has been found
-                        biggestFound = true;
-                        System.out.println(dairycows.get(mostMilk));
+                    //Set the next biggest cow
+                    mostMilk = milk;
+                    //After first time through the loop, the cow that produces the most milk has been found
+                    biggestFound = true;
+                    System.out.println(dairycows.get(mostMilk));
 
-                    }
                 }
             }
-
-            app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
-
-        } else if (option == 0){
-
-            System.out.println("Exiting....");
-            System.exit(0);
-
         }
+
+        app(farm1, shed1, shed2, animals1, animals2, goats, dairycows);
 
     }
 
