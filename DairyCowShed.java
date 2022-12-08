@@ -14,6 +14,10 @@ public class DairyCowShed extends Shed{
         this.tank = tank;
     }
 
+    public DairyCowShed(Collection<Animal> animals) {
+        super(animals);
+    }
+
     public DairyCowShed(Collection<Animal> animals, MilkingMachine machine, MilkTank tank) {
         super(animals);
         this.machine = machine;
@@ -29,6 +33,18 @@ public class DairyCowShed extends Shed{
         this.machine = milkingMachine;
         this.machine.setMilkTank(tank);
 
+    }
+
+    public void setTank(MilkTank tank) {
+        this.tank = tank;
+    }
+
+    public MilkingMachine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(MilkingMachine machine) {
+        this.machine = machine;
     }
 
     public void milkAnimal(Milkable animal){

@@ -13,104 +13,90 @@ public class StartUp {
         try (Scanner sc = new Scanner(new File("StartUp.txt"))) {
             while (done == false) {
 
+
+                //ArrayList to hold all the goats
+                ArrayList<Goat> goats = new ArrayList<>();
+                ArrayList<Sheep> sheep = new ArrayList();
+                ArrayList<DairyCow> dairycows = new ArrayList<>();
+                ArrayList<BeefCow> beefcows = new ArrayList();
+                //Create arrayList of animals which will be put in the goat shed
+                ArrayList<Animal> animals1 = new ArrayList<>();
+                //Create arrayList of animals which will be put in the goat shed
+                ArrayList<Animal> animals2 = new ArrayList<>();
+
+                Farm farm1 = null;
+                Goat g1 = null;
+                Sheep s1 = null;
+                DairyCow dc1 = null;
+                BeefCow bc1 = null;
+                DairyCowShed dcShed = new DairyCowShed();
+                MilkTank mt2 = null;
+
+                String ObjectType = "";
+
                 while (sc.hasNext()) {
 
                     try {
 
-                        Farm farm1 = new Farm(sc.nextLine());
+                        ObjectType = sc.next();
 
-                        //Make goats with values from file
-                        Goat g1 = new Goat(sc.nextInt(), sc.nextDouble());
-                        Goat g2 = new Goat(sc.nextInt(), sc.nextDouble());
-                        Goat g3 = new Goat(sc.nextInt(), sc.nextDouble());
-                        Goat g4 = new Goat(sc.nextInt(), sc.nextDouble());
+                        if (ObjectType.equals("Farm")) {
+                            farm1 = new Farm(sc.next());
 
-                        //ArrayList with all the goats
-                        ArrayList<Goat> goats = new ArrayList<>();
-                        goats.add(g1);
-                        goats.add(g2);
-                        goats.add(g3);
-                        goats.add(g4);
+                        }else if (ObjectType.equals("Goat")) {
+                                //Make goats with values from file
+                                g1 = new Goat(sc.nextInt(), sc.nextDouble());
+                                goats.add(g1);
+                                animals1.add(g1);
 
-                        //Make sheep with values from file
-                        Sheep s1 = new Sheep(sc.nextInt(), sc.nextInt(), sc.nextInt());
-                        Sheep s2 = new Sheep(sc.nextInt(), sc.nextInt(), sc.nextInt());
+                        } else if (ObjectType.equals("Sheep")) {
 
-                        ArrayList<Sheep> sheep = new ArrayList();
-                        sheep.add(s1);
-                        sheep.add(s2);
+                            s1 = new Sheep(sc.nextInt(), sc.nextInt(), sc.nextInt());
+                            sheep.add(s1);
+                            animals1.add(s1);
 
-                        //Create arrayList of animals which will be put in the dairy cow shed
-                        ArrayList<Animal> animals1 = new ArrayList<>();
-                        animals1.add(g1);
-                        animals1.add(g2);
-                        animals1.add(g3);
-                        animals1.add(g4);
-                        animals1.add(s1);
-                        animals1.add(s2);
+                        } else if (ObjectType.equals("DairyCow")) {
+                            dc1 = new DairyCow(sc.nextInt(), sc.nextDouble());
+                            dairycows.add(dc1);
+                            animals2.add(dc1);
 
-                        MilkingMachine mm1 = new MilkingMachine();
+                        } else if (ObjectType.equals("NamedDairyCow")) {
+                            dc1 = new DairyCow(sc.next(), sc.nextInt(), sc.nextDouble());
+                            dairycows.add(dc1);
+                            animals2.add(dc1);
 
-                        MilkTank mt1 = new MilkTank();
+                        } else if (ObjectType.equals("BeefCow")) {
+                            bc1 = new BeefCow(sc.nextInt(), sc.nextDouble(), sc.nextInt());
+                            beefcows.add(bc1);
+                            animals2.add(bc1);
 
-                        mm1.setMilkTank(mt1);
-
-                        //Make dairy cows with values from file
-                        DairyCow dc1 = new DairyCow(sc.nextInt(), sc.nextDouble());
-                        DairyCow dc2 = new DairyCow(sc.nextInt(), sc.nextDouble());
-                        DairyCow dc3 = new DairyCow(sc.nextInt(), sc.nextDouble());
-
-                        //Move scanner forward
-                        sc.nextLine();
-
-                        DairyCow dc4 = new DairyCow(sc.next(), sc.nextInt(), sc.nextDouble());
-
-                        //ArrayList with all the cows
-                        ArrayList<DairyCow> dairycows = new ArrayList<>();
-                        dairycows.add(dc1);
-                        dairycows.add(dc2);
-                        dairycows.add(dc3);
-                        dairycows.add(dc4);
-
-                        //Make beef cows with values from file
-                        BeefCow bc1 = new BeefCow(sc.nextInt(), sc.nextDouble(), sc.nextInt());
-                        BeefCow bc2 = new BeefCow(sc.nextInt(), sc.nextDouble(), sc.nextInt());
-
-                        ArrayList<BeefCow> beefcows = new ArrayList();
-                        beefcows.add(bc1);
-                        beefcows.add(bc2);
-
-                        //Create arrayList of animals which will be put in the goat shed
-                        ArrayList<Animal> animals2 = new ArrayList<>();
-                        animals2.add(dc1);
-                        animals2.add(dc2);
-                        animals2.add(dc3);
-                        animals2.add(dc4);
-                        animals2.add(bc1);
-                        animals2.add(bc2);
-
-                        MilkingMachine mm2 = new MilkingMachine();
-
-                        MilkTank mt2 = new MilkTank(sc.nextInt());
-
-                        mm2.setMilkTank(mt2);
-
-                        GoatShed goatShed = new GoatShed(animals2, mm2, mt2);
-                        DairyCowShed dcShed = new DairyCowShed(animals1, mm1, mt1);
-
-                        ArrayList<Shed> sheds = new ArrayList<>();
-                        sheds.add(dcShed);
-                        sheds.add(goatShed);
-
-                        farm1.setSheds(sheds);
-
-                        FarmApp.app(farm1, dcShed, goatShed, animals1, animals2, goats, dairycows, sheep, beefcows);
+                        }else if (ObjectType.equals("CowTank")){
+                            mt2 = new MilkTank(sc.nextInt());
+                            dcShed.setTank(mt2);
+                        }
 
                     } catch (InputMismatchException ex) {
                         System.out.println("Mismatch");
                         sc.next();   //move cursor on to next token in file
                     }
                 }
+
+                GoatShed goatShed = new GoatShed(animals1);
+
+                MilkTank mt1 = new MilkTank();
+
+                goatShed.setTank(mt1);
+
+                dcShed.setAnimals(animals2);
+
+                ArrayList<Shed> sheds = new ArrayList<>();
+                sheds.add(goatShed);
+                sheds.add(dcShed);
+
+                farm1.setSheds(sheds);
+
+                FarmApp.app(farm1, sheds, dcShed, goatShed, animals1, animals2, goats, dairycows, sheep, beefcows);
+
                 done = true;
             }
         } catch (FileNotFoundException ex) {

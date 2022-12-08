@@ -7,9 +7,18 @@ public class GoatShed extends Shed{
 
         private MilkTank tank;
 
+        public GoatShed(){
+
+        }
+
         public GoatShed(MilkTank tank) {
             this.tank = tank;
         }
+
+    public GoatShed(Collection<Animal> animals) {
+        super(animals);
+
+    }
 
         public GoatShed(Collection<Animal> animals, MilkingMachine machine, MilkTank tank) {
             super(animals);
@@ -28,7 +37,19 @@ public class GoatShed extends Shed{
 
         }
 
-        public void milkAnimal(Milkable animal){
+    public void setTank(MilkTank tank) {
+        this.tank = tank;
+    }
+
+    public MilkingMachine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(MilkingMachine machine) {
+        this.machine = machine;
+    }
+
+    public void milkAnimal(Milkable animal){
 
             this.machine.milk(animal);
 

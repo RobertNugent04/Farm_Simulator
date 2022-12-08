@@ -81,7 +81,7 @@ public class DairyCow extends Animal implements Milkable {
     public String toString() {
         return "DairyCow{" +
                 "name='" + name + '\'' +
-                ", udderCapacity = " + udderCapacity +
+                ", udderCapacity = " + udderCapacity + "liters" +
                 super.toString() +
                 '}';
     }
