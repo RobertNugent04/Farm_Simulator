@@ -3,15 +3,18 @@ import java.util.Random;
 public class DairyCow extends Animal implements Milkable {
 
     //String array filled with random names to be given to the cows
-    static String[] names = new String[]{"Mary", "Maxine", "Ivy", "Elena", "Fiona"};
+    static final String[] names = new String[]{"Mary", "Maxine", "Ivy", "Elena", "Fiona"};
 
     //Dairy cows have separate ids from goats
-
     private String name;
 
     private int udderCapacity;
 
     private int timesMilked;
+
+    public DairyCow(){
+
+    }
 
     public DairyCow(int age, double weight) {
         super(age, weight);

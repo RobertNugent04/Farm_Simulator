@@ -10,7 +10,7 @@ public class StartUp {
 
         boolean done = false;
 
-        try (Scanner sc = new Scanner(new File("StartUp.txt"))) {
+        try (Scanner sc = new Scanner(new File("StartUp"))) {
             while (done == false) {
 
 
@@ -29,6 +29,7 @@ public class StartUp {
                 Sheep s1 = null;
                 DairyCow dc1 = null;
                 BeefCow bc1 = null;
+                GoatShed goatShed = new GoatShed();
                 DairyCowShed dcShed = new DairyCowShed();
                 MilkTank mt2 = null;
 
@@ -81,7 +82,7 @@ public class StartUp {
                     }
                 }
 
-                GoatShed goatShed = new GoatShed(animals1);
+                goatShed.setAnimals(animals1);
 
                 MilkTank mt1 = new MilkTank();
 

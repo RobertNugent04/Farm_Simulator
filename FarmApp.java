@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,23 +43,7 @@ public class FarmApp {
 
         } else if (option == 3) {
 
-            System.out.println("****************************");
-            System.out.println("Enter id of shed to add an animal to::");
-            System.out.println("****************************");
-            type = keyboard.nextInt();
-
-            System.out.println("****************************");
-            System.out.println("Select a type of animal to add:");
-            System.out.println("1.Goat");
-            System.out.println("2.Sheep");
-            System.out.println("3.Dairy cow");
-            System.out.println("4.Beef Cow");
-            System.out.println("****************************");
-            option = keyboard.nextInt();
-
-
-
-            //sheds.get(type - 1).getAnimals().add(0);
+            addAnimal(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
         } else if (option == 4) {
 
@@ -74,9 +59,11 @@ public class FarmApp {
 
         } else if (option == 7) {
 
-            shed1.getTank().emptyTank();
-            shed2.getTank().emptyTank();
-            System.out.println("All milk has been collected from tanks");
+            for (int i = 0; i < sheds.size(); i++){
+                sheds.get(i).getTank().emptyTank();
+            }
+
+            System.out.println("All milk has been collected from the tanks");
             app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
         } else if (option == 8) {
@@ -89,7 +76,7 @@ public class FarmApp {
 
         } else if (option == 10) {
 
-            //Add a shed
+            addShed(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
         } else if (option == 11) {
 
@@ -183,6 +170,73 @@ public class FarmApp {
 
         }
 
+
+    }
+
+    public static void addAnimal(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows){
+
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("Enter id of shed to add an animal to:");
+        int type = keyboard.nextInt();
+
+        System.out.println("****************************");
+        System.out.println("Select a type of animal to add:");
+        System.out.println("1.Goat");
+        System.out.println("2.Sheep");
+        System.out.println("3.Dairy cow");
+        System.out.println("4.Beef Cow");
+        System.out.println("****************************");
+        int option = keyboard.nextInt();
+
+        System.out.println("Enter the weight of the animal: ");
+        double weight = keyboard.nextDouble();
+
+        System.out.println("Enter the age of the animal: ");
+        int age = keyboard.nextInt();
+
+        if (sheds.get(type - 1) instanceof GoatShed && option == 1){
+
+            Goat animal = new Goat(age, weight);
+
+            farm1.getSheds().get(type - 1).getAnimals().add(animal);
+
+        }else if(sheds.get(type - 1) instanceof GoatShed && option == 2){
+
+            System.out.println("Enter the pedigree of the animal: ");
+            option = keyboard.nextInt();
+
+            Sheep animal = new Sheep(age, weight, option);
+
+            farm1.getSheds().get(type - 1).getAnimals().add(animal);
+        }
+
+        else if(sheds.get(type - 1) instanceof DairyCowShed && option == 3){
+
+            System.out.println("Enter the name of the animal: ");
+            String name = keyboard.next();
+
+            DairyCow animal = new DairyCow(name, age, weight);
+
+            farm1.getSheds().get(type - 1).getAnimals().add(animal);
+
+        } else if (sheds.get(type - 1) instanceof DairyCowShed && option == 4) {
+
+            System.out.println("Enter the pedigree of the animal: ");
+            option = keyboard.nextInt();
+
+            BeefCow animal = new BeefCow(age, weight, option);
+
+            farm1.getSheds().get(type - 1).getAnimals().add(animal);
+        }
+        else{
+
+            System.out.println("Invalid Input");
+
+        }
+
+        System.out.println("Animal has been added to the farm");
+        app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
     }
 
@@ -815,14 +869,10 @@ public class FarmApp {
             int option = 0;
             Scanner keyboard = new Scanner(System.in);
 
-            System.out.println("****************************");
-            System.out.println("Select a shed:");
-            System.out.println("1.Goat shed");
-            System.out.println("2.Dairy cow shed");
-            System.out.println("****************************");
+            System.out.println("Enter the id of the shed: ");
             option = keyboard.nextInt();
 
-            while (option < 1 || option > 2) {
+            while (option < 1 || option > sheds.size()) {
 
                 System.out.println("Invalid Input");
                 System.out.println();
@@ -835,18 +885,38 @@ public class FarmApp {
 
             }
 
+            System.out.println(sheds.get(option - 1));
+            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+
+        }
+
+        public static void addShed(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows){
+
+            Scanner keyboard = new Scanner(System.in);
+
+            System.out.println("****************************");
+            System.out.println("Select the type of shed:");
+            System.out.println("1.Goat shed");
+            System.out.println("2.Dairy cow shed");
+            System.out.println("****************************");
+            int option = keyboard.nextInt();
+
+            System.out.println("Enter the capacity of the shed's milk tank: ");
+            int capacity = keyboard.nextInt();
+
+            MilkTank m = new MilkTank(capacity);
+
             if (option == 1){
-
-                System.out.println(shed1);
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-
+                GoatShed gs = new GoatShed();
+                gs.setTank(m);
+                farm1.getSheds().add(gs);
             } else if (option == 2) {
-
-                System.out.println(shed2);
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
+                DairyCowShed ds = new DairyCowShed();
+                ds.setTank(m);
+                farm1.getSheds().add(ds);
             }
+
+            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
         }
 
@@ -855,102 +925,52 @@ public class FarmApp {
             int option = 0;
             Scanner keyboard = new Scanner(System.in);
 
-            System.out.println("****************************");
-            System.out.println("Select a shed:");
-            System.out.println("1.Goat shed");
-            System.out.println("2.Dairy cow shed");
-            System.out.println("****************************");
-            option = keyboard.nextInt();
+            System.out.println("Enter the id of the shed");
+            int id = keyboard.nextInt();
 
-            while (option < 1 || option > 2) {
+            while (option < 1 || option > sheds.size()) {
 
                 System.out.println("Invalid Input");
                 System.out.println();
-                System.out.println("****************************");
-                System.out.println("Select a shed:");
-                System.out.println("1.Goat shed");
-                System.out.println("2.Dairy cow shed");
-                System.out.println("****************************");
-                option = keyboard.nextInt();
+                System.out.println("Enter the id of the shed");
+                id = keyboard.nextInt();
 
             }
 
-            if (option == 1){
+            System.out.println("****************************");
+            System.out.println("Select what you want to edit:");
+            System.out.println("1.Tank Capacity");
+            System.out.println("****************************");
+            option = keyboard.nextInt();
 
+            while(option != 1){
+
+                System.out.println("Invalid option!");
+                System.out.println();
                 System.out.println("****************************");
                 System.out.println("Select what you want to edit:");
                 System.out.println("1.Tank Capacity");
                 System.out.println("****************************");
                 option = keyboard.nextInt();
 
-                while(option != 1){
+            }
 
-                    System.out.println("Invalid option!");
-                    System.out.println();
-                    System.out.println("****************************");
-                    System.out.println("Select what you want to edit:");
-                    System.out.println("1.Tank Capacity");
-                    System.out.println("****************************");
-                    option = keyboard.nextInt();
+            System.out.println("Enter the new tank capacity: ");
+            option = keyboard.nextInt();
 
-                }
+            while(option > 0){
 
+                System.out.println("Invalid option!");
+                System.out.println();
                 System.out.println("Enter the new tank capacity: ");
                 option = keyboard.nextInt();
-
-                while(option > 0){
-
-                    System.out.println("Invalid option!");
-                    System.out.println();
-                    System.out.println("Enter the new tank capacity: ");
-                    option = keyboard.nextInt();
-
-                }
-
-                shed1.getTank().setCustomCapacity(option);
-                System.out.println("Capacity Updated");
-
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-
-            } else if (option == 2) {
-
-                System.out.println("****************************");
-                System.out.println("Select what you want to edit:");
-                System.out.println("1.Tank Capacity");
-                System.out.println("****************************");
-                option = keyboard.nextInt();
-
-                while(option != 1){
-
-                    System.out.println("Invalid option!");
-                    System.out.println();
-                    System.out.println("****************************");
-                    System.out.println("Select what you want to edit:");
-                    System.out.println("1.Tank Capacity");
-                    System.out.println("****************************");
-                    option = keyboard.nextInt();
-
-                }
-
-                System.out.println("Enter the new tank capacity: ");
-                option = keyboard.nextInt();
-
-                while(option > 0){
-
-                    System.out.println("Invalid option!");
-                    System.out.println();
-                    System.out.println("Enter the new tank capacity: ");
-                    option = keyboard.nextInt();
-
-                }
-
-                shed2.getTank().setCustomCapacity(option);
-                System.out.println("Capacity Updated");
-
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
             }
+
+            sheds.get(id - 1).getTank().setCustomCapacity(option);
+            System.out.println("Capacity Updated");
+
+            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
         }
 
@@ -959,14 +979,10 @@ public class FarmApp {
             int option = 0;
             Scanner keyboard = new Scanner(System.in);
 
-            System.out.println("****************************");
-            System.out.println("Select a shed to delete:");
-            System.out.println("1.Goat shed");
-            System.out.println("2.Dairy cow shed");
-            System.out.println("****************************");
+            System.out.println("Enter the id of the shed: ");
             option = keyboard.nextInt();
 
-            while (option < 1 || option > 2) {
+            while (option < 1 || option > sheds.size()) {
 
                 System.out.println("Invalid Input");
                 System.out.println();

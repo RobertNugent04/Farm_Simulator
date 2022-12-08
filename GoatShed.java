@@ -1,78 +1,29 @@
 import java.util.Collection;
 
-public class GoatShed extends Shed{
+public class GoatShed extends Shed {
 
-    //A goat shed stores only the goats so that they can be milked separately from the cows
-        private MilkingMachine machine;
+    //A dairy cow shed stores only the dairy cows so that they are milked separately from the goats
 
-        private MilkTank tank;
+    public GoatShed() {
+    }
 
-        public GoatShed(){
-
-        }
-
-        public GoatShed(MilkTank tank) {
-            this.tank = tank;
-        }
+    public GoatShed(MilkTank tank) {
+        super(tank);
+    }
 
     public GoatShed(Collection<Animal> animals) {
         super(animals);
-
     }
 
-        public GoatShed(Collection<Animal> animals, MilkingMachine machine, MilkTank tank) {
-            super(animals);
-            this.machine = machine;
-            this.tank = tank;
-        }
-
-        public MilkTank getTank() {
-            return tank;
-        }
-
-        public void installMilkingMachine(MilkingMachine milkingMachine){
-
-            this.machine = milkingMachine;
-            this.machine.setMilkTank(tank);
-
-        }
-
-    public void setTank(MilkTank tank) {
-        this.tank = tank;
+    public GoatShed(Collection<Animal> animals, MilkingMachine machine, MilkTank tank) {
+        super(animals, machine, tank);
     }
 
-    public MilkingMachine getMachine() {
-        return machine;
-    }
-
-    public void setMachine(MilkingMachine machine) {
-        this.machine = machine;
-    }
-
-    public void milkAnimal(Milkable animal){
-
-            this.machine.milk(animal);
-
-        }
-
-        public void milkAnimal(Collection<Animal> animals){
-
-            for (int i = 0; i < animals.size(); i++){
-
-                if(animals instanceof Milkable) {
-                    this.tank.addToTank(((Milkable) animals.toArray()[i]).milkProduced());
-                }
-
-            }
-
-        }
 
     @Override
     public String toString() {
         return "GoatShed{" +
                 super.toString() +
-                "machine=" + machine +
-                ", tank=" + tank +
                 '}';
     }
 }
