@@ -38,6 +38,10 @@ public abstract class Shed{
         idCount++;
     }
 
+    public int getShedId() {
+        return shedId;
+    }
+
     public Collection<Animal> getAnimals() {
         return animals;
     }

@@ -256,272 +256,116 @@ public class FarmApp {
 
     public static void editAnimal(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows) {
 
-        int type = 0;
+        int animalId = 0;
         Scanner keyboard = new Scanner(System.in);
         int option = 0;
+        ArrayList<Animal> animals = new ArrayList<>();
 
-        System.out.println("****************************");
-        System.out.println("Select an animal to edit:");
-        System.out.println("1.Goat");
-        System.out.println("2.Sheep");
-        System.out.println("3.Dairy Cow");
-        System.out.println("4.Beef cow");
-        System.out.println("****************************");
-        type = keyboard.nextInt();
-
-        System.out.println("****************************");
-        System.out.println("Select what you want to edit:");
-        System.out.println("1.Name");
-        System.out.println("2.Age");
-        System.out.println("3.Weight");
-        System.out.println("4.Pedigree");
-        System.out.println("5.Milk Produced");
-        System.out.println("****************************");
-        option = keyboard.nextInt();
-
-        System.out.println("Enter the id of the animal you would like to edit: ");
+        System.out.println("Enter the id of the animal you want edit: ");
         int id = keyboard.nextInt();
 
-        if (type == 1) {
+            for (int i = 0; i < farm1.getSheds().size(); i++) {
 
-            if (option == 1) {
+                //Loop through animals to find selected animal
+                for (int j = 0; j < farm1.getSheds().get(i).getAnimals().size(); j++) {
 
-                System.out.println("This animal doesn't have a name");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+                    animals = (ArrayList<Animal>) sheds.get(i).getAnimals();
 
-            } else if (option == 2) {
+                    if (animals.get(j).getId() == id) {
 
-                System.out.println("Please enter the new age: ");
-                option = keyboard.nextInt();
+                        animals = (ArrayList<Animal>) sheds.get(i).getAnimals();
 
-                for (int i = 0; i < goats.size(); i++) {
+                        System.out.println("****************************");
+                        System.out.println("Select what you want to edit:");
+                        System.out.println("1.Name");
+                        System.out.println("2.Age");
+                        System.out.println("3.Weight");
+                        System.out.println("4.Pedigree");
+                        System.out.println("5.Milk Produced");
+                        System.out.println("****************************");
+                        option = keyboard.nextInt();
 
-                    if (goats.get(i).getId() == id) {
-                        goats.get(i).setAge(option);
+                        if(option == 1){
+
+                            if (!(animals.get(j) instanceof DairyCow)) {
+
+                                System.out.println("This animal doesn't have a name");
+                                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+
+                            }
+
+                            else {
+
+                                System.out.println("Enter the new name: ");
+                                String name = keyboard.next();
+
+                                ((DairyCow) animals.get(j)).setName(name);
+
+                            }
+
+                        } else if (option == 2) {
+
+                            System.out.println("Please enter the new age: ");
+                            option = keyboard.nextInt();
+
+                            animals.get(j).setAge(option);
+
+                        } else if (option == 3) {
+
+                            System.out.println("Please enter the new weight: ");
+                            double weight = keyboard.nextInt();
+
+                            animals.get(j).setWeight(weight);
+
+                        } else if (option == 4) {
+
+                            if (!(animals.get(j) instanceof DairyCow || animals.get(j) instanceof Goat)) {
+
+                                System.out.println("This animal doesn't have a pedigree");
+                                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+
+                            } else {
+
+                                System.out.println("Enter the new pedigree: ");
+                                option = keyboard.nextInt();
+
+                                ((BeefCow) animals.get(j)).setPedigree(option);
+
+                            }
+                        } else if (option == 5) {
+
+                            if (animals.get(id - 1) instanceof DairyCow) {
+
+                                System.out.println("Enter the new amount of milk that will be produced: ");
+                                option = keyboard.nextInt();
+
+                                ((DairyCow) animals.get(j)).setUdderCapacity(option);
+
+                            } else if (animals.get(j) instanceof Goat) {
+
+                                System.out.println("Enter the new amount of milk that will be produced: ");
+                                option = keyboard.nextInt();
+
+                                ((Goat) animals.get(j)).setMilkProduced(option);
+
+                            }
+                            else{
+
+                                System.out.println("This animal doesn't produce milk");
+                                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+                            }
+                        }
+
+                        sheds.get(i).setAnimals(animals);
+                        System.out.println("The animal's details have been updated");
+                        app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+
+
                     }
                 }
-                System.out.println("The animal's age has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 3) {
-
-                System.out.println("Please enter the new weight: ");
-                double weight = keyboard.nextInt();
-                ;
-
-                for (int i = 0; i < goats.size(); i++) {
-
-                    if (goats.get(i).getId() == id) {
-                        goats.get(i).setWeight(weight);
-                    }
-                }
-                System.out.println("The animal's weight has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 4) {
-
-                System.out.println("This animal doesn't have a pedigree");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 5) {
-
-                System.out.println("Enter the new amount of milk that will be produced: ");
-                option = keyboard.nextInt();
-
-                for (int i = 0; i < goats.size(); i++) {
-
-                    if (goats.get(i).getId() == id) {
-                        goats.get(i).setMilkProduced(option);
-                    }
-                }
-                System.out.println("The amount of milk produced by the animal has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
             }
 
-        } else if (type == 2) {
-
-            if (option == 1) {
-
-                System.out.println("This animal doesn't have a name");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 2) {
-
-                System.out.println("Please enter the new age: ");
-                option = keyboard.nextInt();
-
-                for (int i = 0; i < sheep.size(); i++) {
-
-                    if (sheep.get(i).getId() == id) {
-                        sheep.get(i).setAge(option);
-                    }
-                }
-                System.out.println("The animal's age has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 3) {
-
-                System.out.println("Please enter the new weight: ");
-                double weight = keyboard.nextInt();
-                ;
-
-                for (int i = 0; i < sheep.size(); i++) {
-
-                    if (sheep.get(i).getId() == id) {
-                        sheep.get(i).setWeight(weight);
-                    }
-                }
-                System.out.println("The animal's weight has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 4) {
-
-                System.out.println("Please enter the new pedigree: ");
-                option = keyboard.nextInt();
-                ;
-
-                for (int i = 0; i < sheep.size(); i++) {
-
-                    if (sheep.get(i).getId() == id) {
-                        sheep.get(i).setPedigree(option);
-                    }
-                }
-                System.out.println("The animal's pedigree has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 5) {
-
-                System.out.println("This animal doesn't produce milk");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-            }
-
-        } else if (type == 3) {
-
-            if (option == 1) {
-
-                System.out.println("Please enter the new name: ");
-                String name = keyboard.nextLine();
-
-                for (int i = 0; i < dairycows.size(); i++) {
-
-                    if (dairycows.get(i).getId() == id) {
-
-                        dairycows.get(i).setName(name);
-
-                    }
-
-                }
-                System.out.println("The animal's name has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 2) {
-
-                System.out.println("Please enter the new age: ");
-                option = keyboard.nextInt();
-
-                for (int i = 0; i < dairycows.size(); i++) {
-
-                    if (dairycows.get(i).getId() == id) {
-                        dairycows.get(i).setAge(option);
-                    }
-                }
-                System.out.println("The animal's age has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 3) {
-
-                System.out.println("Please enter the new weight: ");
-                double weight = keyboard.nextInt();
-                ;
-
-                for (int i = 0; i < dairycows.size(); i++) {
-
-                    if (dairycows.get(i).getId() == id) {
-                        dairycows.get(i).setWeight(weight);
-                    }
-                }
-                System.out.println("The animal's weight has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 4) {
-
-                System.out.println("This animal doesn't have a pedigree");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 5) {
-
-                System.out.println("Enter the new amount of milk that will be produced: ");
-                option = keyboard.nextInt();
-
-                for (int i = 0; i < dairycows.size(); i++) {
-
-                    if (dairycows.get(i).getId() == id) {
-                        dairycows.get(i).setUdderCapacity(option);
-                    }
-                }
-                System.out.println("The amount of milk produced by the animal has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-            }
-
-        } else if (type == 4) {
-
-            if (option == 1) {
-
-                System.out.println("This animal doesn't have a name");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 2) {
-
-                System.out.println("Please enter the new age: ");
-                option = keyboard.nextInt();
-
-                for (int i = 0; i < beefcows.size(); i++) {
-
-                    if (beefcows.get(i).getId() == id) {
-                        beefcows.get(i).setAge(option);
-                    }
-                }
-                System.out.println("The animal's age has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 3) {
-
-                System.out.println("Please enter the new weight: ");
-                double weight = keyboard.nextInt();
-                ;
-
-                for (int i = 0; i < beefcows.size(); i++) {
-
-                    if (beefcows.get(i).getId() == id) {
-                        beefcows.get(i).setWeight(weight);
-                    }
-                }
-                System.out.println("The animal's weight has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 4) {
-
-                System.out.println("Please enter the new pedigree: ");
-                option = keyboard.nextInt();
-
-                for (int i = 0; i < beefcows.size(); i++) {
-
-                    if (beefcows.get(i).getId() == id) {
-                        beefcows.get(i).setPedigree(option);
-                    }
-                }
-                System.out.println("The animal's pedigree has been updated");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-            } else if (option == 5) {
-
-                System.out.println("This animal doesn't produce milk");
-                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-            }
-
-        }
-
-
+            System.out.println("An animal doesn't exist with this id");
     }
 
     public static void removeAnimal(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows) {
@@ -535,8 +379,10 @@ public class FarmApp {
 
         ArrayList<Animal> animals = new ArrayList<>();
 
+        //Loop through sheds
         for (int i = 0; i < farm1.getSheds().size(); i++) {
 
+            //Loop through animals to find selected animal
             for (int j = 0; j < farm1.getSheds().get(i).getAnimals().size(); j++) {
 
                 animals = (ArrayList<Animal>) sheds.get(i).getAnimals();

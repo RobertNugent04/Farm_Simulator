@@ -1,0 +1,14 @@
+Farm Robert
+Goat 5 78.5
+Goat 10 86.3
+Goat 12 44.8
+Goat 14 51.9
+Sheep 5 61 19
+Sheep 3 53 4
+DairyCow 13 700.5
+DairyCow 15 845.2
+DairyCow 18 999.8
+NamedDairyCow Daisy 16 956
+BeefCow 8 925 12
+BeefCow 14 1003 7
+CowTank 4000
