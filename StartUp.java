@@ -10,7 +10,7 @@ public class StartUp {
 
         boolean done = false;
 
-        try (Scanner sc = new Scanner(new File("StartUp"))) {
+        try (Scanner sc = new Scanner(new File("StartUp.txt"))) {
             while (done == false) {
 
 

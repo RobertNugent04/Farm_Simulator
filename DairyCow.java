@@ -1,6 +1,7 @@
+import java.util.Objects;
 import java.util.Random;
 
-public class DairyCow extends Animal implements Milkable {
+public class DairyCow extends Animal implements Milkable, Comparable<DairyCow> {
 
     //String array filled with random names to be given to the cows
     static final String[] names = new String[]{"Mary", "Maxine", "Ivy", "Elena", "Fiona"};
@@ -59,6 +60,20 @@ public class DairyCow extends Animal implements Milkable {
         this.timesMilked = timesMilked;
     }
 
+    //Two dairy cows are the same if they have the same name and udder capacity
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DairyCow)) return false;
+        DairyCow dairyCow = (DairyCow) o;
+        return getUdderCapacity() == dairyCow.getUdderCapacity() && getName().equals(dairyCow.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getUdderCapacity());
+    }
+
     @Override
     public double milkProduced(){
 
@@ -84,8 +99,26 @@ public class DairyCow extends Animal implements Milkable {
     public String toString() {
         return "DairyCow{" +
                 "name='" + name + '\'' +
-                ", udderCapacity = " + udderCapacity + "liters" +
+                ", udderCapacity = " + udderCapacity + " liters" +
                 super.toString() +
                 '}';
+    }
+
+    /**
+     * @param m
+     * @return
+     */
+    @Override
+    public int compareTo(Milkable m) {
+        return Double.compare(this.milkProduced(), m.milkProduced());
+    }
+
+    /**
+     * @param dc the object to be compared.
+     * @return
+     */
+    @Override
+    public int compareTo(DairyCow dc) {
+        return Double.compare(this.udderCapacity, dc.udderCapacity);
     }
 }

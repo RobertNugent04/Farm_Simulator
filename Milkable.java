@@ -1,4 +1,4 @@
-public interface Milkable {
+public interface Milkable extends Compare {
 
 public double milkProduced();
 

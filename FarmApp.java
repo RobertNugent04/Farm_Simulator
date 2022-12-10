@@ -1,10 +1,14 @@
-import java.sql.SQLOutput;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class FarmApp {
 
-    public static void app(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows) {
+    public static void app(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows){
 
         int type = 0;
 
@@ -23,9 +27,10 @@ public class FarmApp {
         System.out.println("10.Add a shed");
         System.out.println("11.Edit a shed");
         System.out.println("12.Delete a shed");
-        System.out.println("13.Install milking machines");
+        System.out.println("13.Install milking machine");
         System.out.println("14.Milk an animal");
         System.out.println("15.Milk all animals on farm");
+        System.out.println("16.Store details of new farm");
         System.out.println("0.Exit");
         System.out.println("****************************");
 
@@ -82,35 +87,47 @@ public class FarmApp {
 
             editShed(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
-        }else if(option == 12){
+        } else if(option == 12){
 
             removeShed(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
-        }else if(option == 13){
+        } else if(option == 13){
 
-            MilkingMachine m1 = new MilkingMachine();
-            MilkingMachine m2 = new MilkingMachine();
+            System.out.println("Enter the id of the shed to install the machine to: ");
+            option = keyboard.nextInt();
 
-            shed1.installMilkingMachine(m1);
-            shed2.installMilkingMachine(m2);
-            System.out.println("Milking machines have been installed");
+            MilkingMachine m = new MilkingMachine();
+
+            sheds.get(option - 1).installMilkingMachine(m);
+
+            System.out.println("Milking machine has been installed");
 
             app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
-        }else if(option == 14){
+        } else if(option == 14){
 
             milkAnimal(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
-        }
-        else if (option == 15) {
+        } else if (option == 15) {
 
                 milkAnimals(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
+        }else if(option == 16){
+
+                saveShedDetails(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+
         }
+
         else if (option == 0) {
 
             System.out.println("Exiting....");
             System.exit(0);
+
+        }
+        else{
+
+            System.out.println("Invalid Input!");
+            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
         }
 
@@ -120,56 +137,28 @@ public class FarmApp {
 
         Scanner keyboard = new Scanner(System.in);
 
-        System.out.println("****************************");
-        System.out.println("Select a type of animal:");
-        System.out.println("1.Goat/Sheep");
-        System.out.println("2.Dairy cow/Beef cow");
-        System.out.println("****************************");
-        int type = keyboard.nextInt();
+            System.out.println("Enter the id of the animal: ");
+            int option = keyboard.nextInt();
 
-        while (type < 1 || type > 2) {
+            ArrayList<Animal> animals = new ArrayList<>();
 
-            System.out.println("Invalid type");
-            System.out.println();
-            System.out.println("****************************");
-            System.out.println("Select a type of animal:");
-            System.out.println("1.Goat/Sheep");
-            System.out.println("2.Dairy cow/Beef cow");
-            System.out.println("****************************");
-            type = keyboard.nextInt();
+            for (int i = 0; i < farm1.getSheds().size(); i++) {
 
-        }
+                for (int j = 0; j < farm1.getSheds().get(i).getAnimals().size(); j++) {
 
-        System.out.println("Enter the id of the animal: ");
-        int option = keyboard.nextInt();
+                    animals = (ArrayList<Animal>) sheds.get(i).getAnimals();
 
-        if (type == 1) {
+                    if (animals.get(j).getId() == option) {
 
-            for (int i = 0; i < animals1.size(); i++) {
-
-                if (animals1.get(i).getId() == option) {
-                    System.out.println(animals1.get(i));
-                    app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+                        System.out.println(animals.get(j));
+                        app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+                    }
                 }
 
             }
 
-            System.out.println("A goat/sheep cow does not exist with this id");
-            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-        } else if (type == 2) {
-
-            for (int i = 0; i < animals2.size(); i++) {
-
-                if (animals2.get(i).getId() == option) {
-                    System.out.println(animals2.get(i));
-                    app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-                }
-            }
-            System.out.println("A dairy cow/beef cow does not exist with this id");
-            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-        }
-
+        System.out.println("An animal does not exist with this id!");
+        app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
     }
 
@@ -180,6 +169,17 @@ public class FarmApp {
         System.out.println("Enter id of shed to add an animal to:");
         int type = keyboard.nextInt();
 
+        try{
+
+            sheds.get(type - 1);
+
+        }catch (ArrayIndexOutOfBoundsException ex){
+
+            System.out.println("A shed does not exist with this id!");
+            addAnimal(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+
+        }
+
         System.out.println("****************************");
         System.out.println("Select a type of animal to add:");
         System.out.println("1.Goat");
@@ -188,6 +188,20 @@ public class FarmApp {
         System.out.println("4.Beef Cow");
         System.out.println("****************************");
         int option = keyboard.nextInt();
+
+        while(option < 1 || option > 4){
+
+            System.out.println("Invalid Input!");
+            System.out.println();
+            System.out.println("****************************");
+            System.out.println("Select a type of animal to add:");
+            System.out.println("1.Goat");
+            System.out.println("2.Sheep");
+            System.out.println("3.Dairy cow");
+            System.out.println("4.Beef Cow");
+            System.out.println("****************************");
+            option = keyboard.nextInt();
+        }
 
         System.out.println("Enter the weight of the animal: ");
         double weight = keyboard.nextDouble();
@@ -232,7 +246,7 @@ public class FarmApp {
         else{
 
             System.out.println("Invalid Input");
-
+            addAnimal(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
         }
 
         System.out.println("Animal has been added to the farm");
@@ -489,7 +503,6 @@ public class FarmApp {
 
                 System.out.println("Please enter the new pedigree: ");
                 option = keyboard.nextInt();
-                ;
 
                 for (int i = 0; i < beefcows.size(); i++) {
 
@@ -517,46 +530,29 @@ public class FarmApp {
         int option = 0;
         Scanner keyboard = new Scanner(System.in);
 
-        System.out.println("****************************");
-        System.out.println("Select a type of animal:");
-        System.out.println("1.Goat/Sheep");
-        System.out.println("2.Dairy cow/Beef cow");
-        System.out.println("****************************");
-        type = keyboard.nextInt();
-
-        while (type < 1 || type > 2) {
-
-            System.out.println("Invalid type");
-            System.out.println();
-            System.out.println("****************************");
-            System.out.println("Select a type of animal:");
-            System.out.println("1.Goat/Sheep");
-            System.out.println("2.Dairy cow/Beef cow");
-            System.out.println("****************************");
-            type = keyboard.nextInt();
-
-        }
-
-        System.out.println("Enter the id of the animal: ");
+        System.out.println("Enter the id of the animal you want to remove: ");
         option = keyboard.nextInt();
 
-        if (type == 1 && option > -1 || option < animals1.size()) {
+        ArrayList<Animal> animals = new ArrayList<>();
 
-            animals1.remove(option);
-            System.out.println("Animal removed");
-            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+        for (int i = 0; i < farm1.getSheds().size(); i++) {
 
-        } else if (type == 2 && option < 0 || option > animals1.size()) {
+            for (int j = 0; j < farm1.getSheds().get(i).getAnimals().size(); j++) {
 
-            animals2.remove(option);
-            System.out.println("Animal removed");
-            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-        } else {
+                animals = (ArrayList<Animal>) sheds.get(i).getAnimals();
 
-            System.out.println("An animal does not exist with this id");
-            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+                if (animals.get(j).getId() == option) {
+
+                    ((ArrayList<Animal>) sheds.get(i).getAnimals()).remove(j);
+                    System.out.println("Animal has been removed");
+                    app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+                }
+            }
 
         }
+
+        System.out.println("An animal does not exist with this id!");
+        removeAnimal(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
 
     }
 
@@ -639,230 +635,49 @@ public class FarmApp {
     public static void orderAnimals(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows) {
 
         Scanner keyboard = new Scanner(System.in);
-        int best = 0;
-        int value = 0;
-        int size = 0;
+        int option = 0;
 
-        System.out.println("****************************");
-        System.out.println("Select the herd to order:");
-        System.out.println("1.Goats and Sheep");
-        System.out.println("2.Dairy cows and Beef cows");
-        System.out.println("****************************");
-        int option = keyboard.nextInt();
-
-        if (option == 1) {
+        System.out.println("Enter the id of the shed containing the herd you want to order: ");
+        int id = keyboard.nextInt();
 
             System.out.println("****************************");
-            System.out.println("Select a value to order by:");
-            System.out.println("1.Milk produced");
-            System.out.println("2.Pedigree");
-            System.out.println("3.Weight");
-            System.out.println("4.Age");
+            System.out.println("Select values to order by:");
+            System.out.println("1.Milk produced, pedigree, weight and age");
             System.out.println("****************************");
             option = keyboard.nextInt();
 
             if (option == 1) {
 
-                //Create copy of ArrayList
-                ArrayList<Goat> g = goats;
-                //Store original size of arrayList
-                size = g.size();
+                //Two arrayLists to separate the milkables from the non-milkables
+                ArrayList<Milkable> milkables = new ArrayList<>();
+                ArrayList<Animal> other = new ArrayList<>();
 
-                for (int j = 0; j < size; j++) {
-                    best = 0;
-                    for (int i = 0; i < g.size(); i++) {
+                //ArrayList to hold the animals in the shed
+                ArrayList<Animal> animals = (ArrayList<Animal>) sheds.get(id - 1).getAnimals();
 
-                        //Find the goat with the most milk
-                        if (g.get(i).getMilkProduced() > g.get(best).getMilkProduced()) {
-                            best = i;
-                        }
+                //Loop through animals in shed to separate them into the two arrayLists
+                for (int i = 0; i < sheds.get(id - 1).getAnimals().size(); i++) {
 
-                    }
+                    if (animals.get(i) instanceof Milkable) {
 
-                    System.out.println(g.get(best));
-                    //Remove the goat with the most milk so that it is not printed again on the next lop
-                    g.remove(best);
+                        milkables.add((Milkable) animals.get(i));
 
-                }
-                //Print the sheep in the herd. The order doesn't matter because they do not produce milk
-                for (int s = 0; s < sheep.size(); s++) {
+                    } else {
 
-                    System.out.println(sheep.get(s));
-
-                }
-            } else if (option == 2) {
-
-                ArrayList<Sheep> s = sheep;
-                size = s.size();
-
-                for (int j = 0; j < size; j++) {
-                    best = 0;
-                    for (int i = 0; i < s.size(); i++) {
-
-
-                        if (s.get(i).getPedigree() > s.get(best).getPedigree()) {
-                            best = i;
-                        }
+                        other.add(animals.get(i));
 
                     }
-
-                    System.out.println(s.get(best));
-                    s.remove(best);
-
-                }
-                for (int z = 0; z < goats.size(); z++) {
-
-                    System.out.println(goats.get(z));
-
-                }
-            }
-        else if (option == 3) {
-
-            ArrayList<Animal> animals = animals1;
-            size = animals.size();
-
-                for (int j = 0; j < size; j++) {
-                    best = 0;
-                    for (int i = 0; i < animals1.size(); i++) {
-
-
-                            //Weight ordered from heaviest to lightest
-                            if (animals.get(i).getWeight() > animals.get(best).getWeight()) {
-                                best = i;
-
-                            }
-                    }
-                    System.out.println(animals.get(best));
-                    animals.remove(best);
-
                 }
 
-            } else if (option == 4) {
-
-                ArrayList<Animal> animals = animals1;
-                size = animals.size();
-
-                for (int j = 0; j < size; j++) {
-                    best = 0;
-                    for (int i = 0; i < animals.size(); i++) {
-
-                        //Age ordered from oldest to youngest
-                        if (animals.get(i).getAge() > animals.get(best).getAge()) {
-                            best = i;
-
-
-                        }
-                    }
-                    System.out.println(animals.get(best));
-                    animals.remove(best);
-
-                }
-            }} else if (option == 2) {
-
-                System.out.println("****************************");
-                System.out.println("Select a value to order by:");
-                System.out.println("1.Milk produced");
-                System.out.println("2.Pedigree");
-                System.out.println("3.Weight");
-                System.out.println("4.Age");
-                System.out.println("****************************");
-                option = keyboard.nextInt();
-
-                if (option == 1) {
-
-                    ArrayList<DairyCow> dc = dairycows;
-                    size = dc.size();
-
-                    for (int j = 0; j < size; j++) {
-                        best = 0;
-                        for (int i = 0; i < dc.size(); i++) {
-
-                                if (dc.get(i).getUdderCapacity() > dc.get(best).getUdderCapacity()) {
-                                    best = i;
-
-                                }
-                        }
-                        System.out.println(dc.get(best));
-                        dc.remove(best);
-                    }
-
-                    for (int b = 0; b < beefcows.size(); b++) {
-
-                        System.out.println(beefcows.get(b));
-
-                    }
-                } else if (option == 2) {
-
-                    ArrayList<BeefCow> bc = beefcows;
-                    size = bc.size();
-
-                    for (int j = 0; j < size; j++) {
-                        best = 0;
-                        for (int i = 0; i < bc.size(); i++) {
-
-                                //Pedigree with the largest number is considered the best
-                                if (bc.get(i).getPedigree() > bc.get(best).getPedigree()) {
-                                    best = i;
-
-                                }
-                        }
-                        System.out.println(sheep.get(best));
-                        sheep.remove(best);
-
-                    }
-
-                    for (int g = 0; g < dairycows.size(); g++)
-
-                        System.out.println(dairycows.get(g));
-
-                } else if (option == 3) {
-
-                    ArrayList<Animal> animals = animals2;
-                    size = animals.size();
-
-                    for (int j = 0; j < size; j++) {
-                        best = 0;
-                        for (int i = 0; i < animals2.size(); i++) {
-
-                                //Weight ordered from heaviest to lightest
-                                if (animals.get(i).getWeight() > animals.get(best).getWeight()) {
-                                    best = i;
-                                }
-                        }
-
-                        System.out.println(animals.get(best));
-                        animals.remove(best);
-
-                    }
-
-                } else if (option == 4) {
-
-                    ArrayList<Animal> animals = animals2;
-                    size = animals.size();
-
-                    for (int j = 0; j < size; j++) {
-                        best = 0;
-                        for (int i = 0; i < animals.size(); i++) {
-
-                                //Age ordered from oldest to youngest
-                                if (animals.get(i).getAge() > animals.get(best).getAge()) {
-                                    best = i;
-
-
-                            }
-                        }
-                        System.out.println(animals.get(best));
-                        animals.remove(best);
-
-                    }
-
-                }
-
+                //Sort the milkables in reverse order so that they go from most milk to the least milk
+                Collections.sort((ArrayList) milkables, Collections.reverseOrder());
+                Collections.sort((ArrayList)other, Collections.reverseOrder());
+                System.out.println(milkables);
+                System.out.println(other);
+                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
             }
 
-            app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
-
-        }
+            }
 
         public static void shedDetails(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows){
 
@@ -999,6 +814,25 @@ public class FarmApp {
             System.out.println("Shed deleted");
 
             app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+
+        }
+
+        public static void saveShedDetails(Farm farm1, ArrayList<Shed> sheds, DairyCowShed shed1, GoatShed shed2, ArrayList<Animal> animals1, ArrayList<Animal> animals2, ArrayList<Goat> goats, ArrayList<DairyCow> dairycows, ArrayList<Sheep> sheep, ArrayList<BeefCow> beefcows) {
+
+            try {
+                File farm = new File("newFarm.txt");
+                FileWriter writer = new FileWriter("newFarm.txt");
+                writer.write(String.valueOf(farm1));
+                writer.close();
+
+            }catch (IOException ex){
+
+                System.out.println("Action failed to perform");
+
+            }
+            finally{
+                app(farm1, sheds, shed1, shed2, animals1, animals2, goats, dairycows, sheep, beefcows);
+            }
 
         }
 

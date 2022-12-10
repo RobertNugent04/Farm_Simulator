@@ -1,12 +1,13 @@
+import java.util.Objects;
+
 public abstract class Animal{
 
-    //Only dairy cows and goats are getting ids, therefore ids are not inherited from the animal class
-
-    //I am assuming that weight is the only common field between all the animals
+    //All animals get ids which are inherited from this class
     private int id;
 
     public static int idCount = 1;
 
+    //All animals have an age and weight
     private int age;
 
     private double weight;
@@ -41,11 +42,27 @@ public abstract class Animal{
         this.weight = weight;
     }
 
+    //Two animals will never have the same id so if they do then they are equal
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Animal)) return false;
+        Animal animal = (Animal) o;
+        return getId() == animal.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
     @Override
     public String toString() {
-        return  " id = " + id +
+        return " id = " + id +
                 ", age = " + age +
                 ", weight=" + weight + "kg";
     }
 
+
 }
+

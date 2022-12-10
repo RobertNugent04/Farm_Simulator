@@ -1,4 +1,4 @@
-public class Sheep extends Animal {
+public class Sheep extends Animal implements Comparable<Sheep> {
 
     private int pedigree;
 
@@ -28,5 +28,25 @@ public class Sheep extends Animal {
                 super.toString() +
                 ", pedigree=" + pedigree +
                 '}';
+    }
+
+    /**
+     * @param s the object to be compared.
+     * @return
+     */
+    @Override
+    public int compareTo(Sheep s) {
+        //If pedigrees aren't equal then sort by pedigree
+        if (Integer.compare(this.pedigree, s.pedigree) != 0) {
+            return Integer.compare(this.pedigree, s.pedigree);
+
+        } else if (Double.compare(this.getWeight(), s.getWeight()) != 0) {
+            return Double.compare(this.getWeight(), s.getWeight());
+
+        }else{
+
+            return Integer.compare(this.getAge(), s.getAge());
+
+        }
     }
 }

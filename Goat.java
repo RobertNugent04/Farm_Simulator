@@ -1,6 +1,7 @@
+import java.util.Objects;
 import java.util.Random;
 
-public class Goat extends Animal implements Milkable {
+public class Goat extends Animal implements Milkable, Comparable<Goat>{
 
     //Goats have separate ids from dairy cows
 
@@ -38,6 +39,19 @@ public class Goat extends Animal implements Milkable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Goat)) return false;
+        Goat goat = (Goat) o;
+        return Double.compare(goat.getMilkProduced(), getMilkProduced()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMilkProduced());
+    }
+
+    @Override
     public double milkProduced() {
 
         Random rand = new Random();
@@ -69,4 +83,19 @@ public class Goat extends Animal implements Milkable {
                 super.toString() +
                 '}';
     }
+
+    @Override
+    public int compareTo(Milkable m) {
+        return Double.compare(this.milkProduced, m.milkProduced());
+    }
+
+    /**
+     * @param g the object to be compared.
+     * @return
+     */
+    @Override
+    public int compareTo(Goat g) {
+        return Double.compare(this.milkProduced, g.milkProduced);
+    }
+
 }
