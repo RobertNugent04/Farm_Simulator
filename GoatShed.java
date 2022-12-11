@@ -2,7 +2,7 @@ import java.util.Collection;
 
 public class GoatShed extends Shed {
 
-    //A dairy cow shed stores only the dairy cows so that they are milked separately from the goats
+    //A goat shed stores only the goats so that they are milked separately from the dairy cows
 
     public GoatShed() {
     }
@@ -18,7 +18,6 @@ public class GoatShed extends Shed {
     public GoatShed(Collection<Animal> animals, MilkingMachine machine, MilkTank tank) {
         super(animals, machine, tank);
     }
-
 
     @Override
     public String toString() {

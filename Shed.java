@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 //There will only be 2 sheds on a farm: a dairy cow shed and a goat shed. These two sheds keep the dairy cows and goats separated so that their milk don't get mixed in the milk tanks.
 //Other animals are also put in these two sheds along with the dairy cows and goats
@@ -50,15 +51,15 @@ public abstract class Shed{
         this.animals = animals;
     }
 
-    public MilkTank getTank() {
-        return tank;
-    }
-
     public void installMilkingMachine(MilkingMachine milkingMachine){
 
         this.machine = milkingMachine;
         this.machine.setMilkTank(tank);
 
+    }
+
+    public MilkTank getTank() {
+        return tank;
     }
 
     public void setTank(MilkTank tank) {
@@ -73,9 +74,12 @@ public abstract class Shed{
         this.machine = machine;
     }
 
-    public void milkAnimal(Milkable animal){
+    public void milkAnimal(Milkable animal) throws IllegalStateException{
 
-        this.machine.milk(animal);
+            //If the animal hasn't been milked 5 times
+            if (animal.NumTimesMilked() < 6) {
+                this.machine.milk(animal);
+            }
 
     }
 
@@ -83,8 +87,11 @@ public abstract class Shed{
 
         for (int i = 0; i < animals.size(); i++){
 
-            if(animals.toArray()[i] instanceof Milkable){
+            //If the animal is milkable and has been milked less than 5 times, milk the animal
+            if(animals.toArray()[i] instanceof Milkable && (((Milkable) animals.toArray()[i]).NumTimesMilked() < 5)){
                 this.tank.addToTank(((Milkable)animals.toArray()[i]).milkProduced());
+                //Increase the number of times the animal has been milked
+                ((Milkable) animals.toArray()[i]).milked();
             }
 
         }
@@ -96,5 +103,19 @@ public abstract class Shed{
         return "shedId = " + shedId +
                 ", animals=" + animals +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Shed)) return false;
+        Shed shed = (Shed) o;
+        //Two sheds are the same if they have the same id
+        return getShedId() == shed.getShedId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getShedId());
     }
 }

@@ -1,10 +1,12 @@
+import java.util.Objects;
+
 public class MilkTank{
 
     private double customCapacity;
 
     private double amountInTank;
 
-    //Default capacity of a tank
+    //Default capacity of a tank as said in brief
     public static final int STANDARD_CAPACITY = 2000;
 
     public MilkTank() {
@@ -73,6 +75,20 @@ public class MilkTank{
 
         }
         return this.amountInTank;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MilkTank)) return false;
+        MilkTank milkTank = (MilkTank) o;
+        //Two milk tanks are equal if they have the same capacity and amount in tank
+        return Double.compare(milkTank.getCustomCapacity(), getCustomCapacity()) == 0 && Double.compare(milkTank.getAmountInTank(), getAmountInTank()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCustomCapacity(), getAmountInTank());
     }
 
     @Override

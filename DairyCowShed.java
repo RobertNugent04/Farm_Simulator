@@ -18,7 +18,6 @@ public class DairyCowShed extends Shed{
         super(animals, machine, tank);
     }
 
-
     @Override
     public String toString() {
         return "DairyCowShed{" +

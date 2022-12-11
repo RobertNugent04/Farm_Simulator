@@ -1,8 +1,8 @@
-public interface Milkable extends Compare {
+public interface Milkable{
 
 public double milkProduced();
 
-public int timesMilked();
+public int NumTimesMilked();
 
 public void milked();
 

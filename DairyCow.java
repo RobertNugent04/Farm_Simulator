@@ -6,7 +6,7 @@ public class DairyCow extends Animal implements Milkable, Comparable<DairyCow> {
     //String array filled with random names to be given to the cows
     static final String[] names = new String[]{"Mary", "Maxine", "Ivy", "Elena", "Fiona"};
 
-    //Dairy cows have separate ids from goats
+    //Dairy cows are the only animals which have names
     private String name;
 
     private int udderCapacity;
@@ -66,6 +66,7 @@ public class DairyCow extends Animal implements Milkable, Comparable<DairyCow> {
         if (this == o) return true;
         if (!(o instanceof DairyCow)) return false;
         DairyCow dairyCow = (DairyCow) o;
+        //Two dairy cows are considered equal if they have the same udder capacity and name
         return getUdderCapacity() == dairyCow.getUdderCapacity() && getName().equals(dairyCow.getName());
     }
 
@@ -82,7 +83,7 @@ public class DairyCow extends Animal implements Milkable, Comparable<DairyCow> {
     }
 
     @Override
-    public int timesMilked(){
+    public int NumTimesMilked(){
 
         return this.timesMilked;
 
@@ -91,7 +92,7 @@ public class DairyCow extends Animal implements Milkable, Comparable<DairyCow> {
     @Override
     public void milked(){
 
-        this.setTimesMilked(this.timesMilked++);
+        this.setTimesMilked(this.timesMilked + 1);
 
     }
 
@@ -100,23 +101,16 @@ public class DairyCow extends Animal implements Milkable, Comparable<DairyCow> {
         return "DairyCow{" +
                 "name='" + name + '\'' +
                 ", udderCapacity = " + udderCapacity + " liters" +
+                ", times milked = " + timesMilked +
                 super.toString() +
                 '}';
-    }
-
-    /**
-     * @param m
-     * @return
-     */
-    @Override
-    public int compareTo(Milkable m) {
-        return Double.compare(this.milkProduced(), m.milkProduced());
     }
 
     /**
      * @param dc the object to be compared.
      * @return
      */
+    //Compare cows based on their udder capacity
     @Override
     public int compareTo(DairyCow dc) {
         return Double.compare(this.udderCapacity, dc.udderCapacity);

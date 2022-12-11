@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Sheep extends Animal implements Comparable<Sheep> {
 
     private int pedigree;
@@ -23,6 +25,11 @@ public class Sheep extends Animal implements Comparable<Sheep> {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getPedigree(), getAge());
+    }
+
+    @Override
     public String toString() {
         return "Sheep{" +
                 super.toString() +
@@ -36,15 +43,16 @@ public class Sheep extends Animal implements Comparable<Sheep> {
      */
     @Override
     public int compareTo(Sheep s) {
-        //If pedigrees aren't equal then sort by pedigree
+        //If pedigrees aren't equal then compare pedigrees
         if (Integer.compare(this.pedigree, s.pedigree) != 0) {
             return Integer.compare(this.pedigree, s.pedigree);
 
+            //If pedigrees are equal then compare weights
         } else if (Double.compare(this.getWeight(), s.getWeight()) != 0) {
             return Double.compare(this.getWeight(), s.getWeight());
 
         }else{
-
+            //If weights are equal then compare ages
             return Integer.compare(this.getAge(), s.getAge());
 
         }

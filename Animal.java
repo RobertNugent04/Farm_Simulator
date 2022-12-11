@@ -48,6 +48,7 @@ public abstract class Animal{
         if (this == o) return true;
         if (!(o instanceof Animal)) return false;
         Animal animal = (Animal) o;
+        //Two animals are equal if they have the same id
         return getId() == animal.getId();
     }
 

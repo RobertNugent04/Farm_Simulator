@@ -1,25 +1,28 @@
+import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Random;
 
 public class Goat extends Animal implements Milkable, Comparable<Goat>{
 
-    //Goats have separate ids from dairy cows
-
+    //Stores the number of times the goat has been milked
     private int timesMilked;
 
     private double milkProduced;
 
+    //Learned from https://mkyong.com/java/how-to-round-double-float-value-to-2-decimal-points-in-java/
+    private static final DecimalFormat decimal = new DecimalFormat("0.00");
+
     public Goat() {
         Random rand = new Random();
         this.timesMilked = 0;
-        this.milkProduced = 2 + (3 - 2) * rand.nextDouble();
+        this.milkProduced = Double.parseDouble(decimal.format(2 + (3 - 2) * rand.nextDouble()));
     }
 
     public Goat(int age, double weight){
         super(age, weight);
         Random rand = new Random();
         this.timesMilked = 0;
-        this.milkProduced = 2 + (3 - 2) * rand.nextDouble();
+        this.milkProduced = Double.parseDouble(decimal.format(2 + (3 - 2) * rand.nextDouble()));
     }
 
     public int getTimesMilked() {
@@ -54,16 +57,12 @@ public class Goat extends Animal implements Milkable, Comparable<Goat>{
     @Override
     public double milkProduced() {
 
-        Random rand = new Random();
-
-        double produced = 2 + (3 - 2) * rand.nextDouble();
-
-        return produced;
+        return this.milkProduced;
 
     }
 
     @Override
-    public int timesMilked(){
+    public int NumTimesMilked(){
 
         return this.timesMilked;
 
@@ -72,21 +71,17 @@ public class Goat extends Animal implements Milkable, Comparable<Goat>{
     @Override
     public void milked() {
 
-        this.setTimesMilked(this.timesMilked++);
+        this.setTimesMilked(this.timesMilked + 1);
 
     }
 
     @Override
     public String toString() {
         return "Goat{" +
-                "milk produced = " + milkProduced +
+                "milk produced = " + milkProduced + " liters" +
+                ", times milked = " + timesMilked +
                 super.toString() +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Milkable m) {
-        return Double.compare(this.milkProduced, m.milkProduced());
     }
 
     /**

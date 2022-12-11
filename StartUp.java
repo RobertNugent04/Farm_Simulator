@@ -13,17 +13,12 @@ public class StartUp {
         try (Scanner sc = new Scanner(new File("StartUp.txt"))) {
             while (done == false) {
 
-
-                //ArrayList to hold all the goats
-                ArrayList<Goat> goats = new ArrayList<>();
-                ArrayList<Sheep> sheep = new ArrayList();
-                ArrayList<DairyCow> dairycows = new ArrayList<>();
-                ArrayList<BeefCow> beefcows = new ArrayList();
                 //Create arrayList of animals which will be put in the goat shed
                 ArrayList<Animal> animals1 = new ArrayList<>();
                 //Create arrayList of animals which will be put in the goat shed
                 ArrayList<Animal> animals2 = new ArrayList<>();
 
+                //Initialize objects for use in the below try block
                 Farm farm1 = null;
                 Goat g1 = null;
                 Sheep s1 = null;
@@ -38,7 +33,7 @@ public class StartUp {
                 while (sc.hasNext()) {
 
                     try {
-
+                        //Check object type and then make the appropriate object
                         ObjectType = sc.next();
 
                         if (ObjectType.equals("Farm")) {
@@ -47,28 +42,23 @@ public class StartUp {
                         }else if (ObjectType.equals("Goat")) {
                                 //Make goats with values from file
                                 g1 = new Goat(sc.nextInt(), sc.nextDouble());
-                                goats.add(g1);
                                 animals1.add(g1);
 
                         } else if (ObjectType.equals("Sheep")) {
 
                             s1 = new Sheep(sc.nextInt(), sc.nextInt(), sc.nextInt());
-                            sheep.add(s1);
                             animals1.add(s1);
 
                         } else if (ObjectType.equals("DairyCow")) {
                             dc1 = new DairyCow(sc.nextInt(), sc.nextDouble());
-                            dairycows.add(dc1);
                             animals2.add(dc1);
 
                         } else if (ObjectType.equals("NamedDairyCow")) {
                             dc1 = new DairyCow(sc.next(), sc.nextInt(), sc.nextDouble());
-                            dairycows.add(dc1);
                             animals2.add(dc1);
 
                         } else if (ObjectType.equals("BeefCow")) {
                             bc1 = new BeefCow(sc.nextInt(), sc.nextDouble(), sc.nextInt());
-                            beefcows.add(bc1);
                             animals2.add(bc1);
 
                         }else if (ObjectType.equals("CowTank")){
@@ -82,8 +72,10 @@ public class StartUp {
                     }
                 }
 
+                //Add all the animals from the previously created arrayList into the goat shed
                 goatShed.setAnimals(animals1);
 
+                //Create a new milk tank to be added to the goat shed
                 MilkTank mt1 = new MilkTank();
 
                 goatShed.setTank(mt1);
@@ -96,7 +88,7 @@ public class StartUp {
 
                 farm1.setSheds(sheds);
 
-                FarmApp.app(farm1, sheds, dcShed, goatShed, animals1, animals2, goats, dairycows, sheep, beefcows);
+                FarmApp.app(farm1, sheds);
 
                 done = true;
             }
